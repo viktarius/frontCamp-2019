@@ -11,4 +11,13 @@ async function getArticle(count, category) {
     return await response.json();
 }
 
-export {getArticle, getSources}
+async function customQuery(_country, _source, _language, _text){
+    const params = [];
+    !(+_country === 0) ? params.push('country=' + _country) : '';
+    !(+_source === 0) ? params.push('domains=' + _source) : '';
+    !(+_language === 0) ? params.push('language=' + _language) : '';
+    _text ? params.push('&q=' + _text) : '';
+    return `${URL}/everything?${params.join('&')}&pageSize=10&apiKey=${API_KEY}`;
+}
+
+export {getArticle, getSources, customQuery}

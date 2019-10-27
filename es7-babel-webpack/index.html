@@ -8,28 +8,55 @@
     <title>Document</title>
 </head>
 <body>
-<header>
-    <nav>
-        <ul id="link-list">
-            <li><a class="link" href="/">home</a></li>
-            <li><a class="link" href="/health">health</a></li>
-            <li><a class="link" href="/science">science</a></li>
-            <li><a class="link" href="/sports">sports</a></li>
-            <li><a class="link" href="/technology">technology</a></li>
-        </ul>
-    </nav>
-</header>
-<main>
-    <div id="params">
+<div id="wrap">
 
-    </div>
-    <div id="articles">
+    <header>
+        <nav>
+            <ul id="link-list">
+                <li><a class="link" href="/">home</a></li>
+                <li><a class="link" href="/health">health</a></li>
+                <li><a class="link" href="/science">science</a></li>
+                <li><a class="link" href="/sports">sports</a></li>
+                <li><a class="link" href="/technology">technology</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="params">
+            <h3>custom query</h3>
+            <form action="" id="customQuery">
+                <label for="countrySelect">country
+                    <select name="countrySelect" id="countrySelect">
+                        <option selected value="0">none</option>
+                    </select>
+                </label>
+                <label for="resourceSelect">resource
+                    <select name="resourceSelect" id="resourceSelect">
+                        <option selected value="0">none</option>
+                    </select>
+                </label>
+                <label for="languageSelect">language
+                    <select name="languageSelect" id="languageSelect">
+                        <option selected value="0">none</option>
+                    </select>
+                </label>
+                <button>search</button>
+            </form>
+        </div>
+        <div id="articles">
 
-    </div>
-</main>
+        </div>
+        <div id="article">
+
+        </div>
+    </main>
+</div>
+
 <footer>
-
+    <p>frontCamp 2019</p>
+    <p>Belski Viktar</p>
 </footer>
+
 <script src="dist/main.bundle.js"></script>
 </body>
 </html>
