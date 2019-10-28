@@ -35,15 +35,12 @@ const renderSource = (sources) => {
     console.table(sources);
     const countrySet = new Set();
     const resourceSet = new Set();
-    const languageSet = new Set();
     for (const source of sources) {
         countrySet.add(source.country);
         resourceSet.add(source.url);
-        languageSet.add(source.language);
     }
     appendOption('countrySelect', countrySet);
     appendOption('resourceSelect', resourceSet);
-    appendOption('languageSelect', languageSet);
 };
 
 const renderNews = (_articles) => {

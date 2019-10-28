@@ -6,7 +6,7 @@ let loadedArticles;
 document.querySelector("#link-list").addEventListener('click', function (event) {
     event.preventDefault();
     const category = event.target.innerHTML === 'home' ? 'general' : event.target.innerHTML;
-    loadArticles(10, category);
+    loadArticles(category);
 });
 
 document.querySelector('#articles').addEventListener('click', function (event) {
@@ -17,18 +17,31 @@ document.querySelector('#articles').addEventListener('click', function (event) {
     }
 });
 
-document.querySelector('#customQuery').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    customQuery(formData.get('countrySelect'), formData.get('resourceSelect'), formData.get('languageSelect'))
-        .then(url => console.log(url));
-});
+const createCustomQuery = (event) => {
+    const formData = new FormData(document.querySelector('#customQuery'));
+    const type = (event.target.id === 'loadTopArticle') ? 'top-headlines' : 'everything';
+    customQuery(formData.get('countrySelect'), formData.get('resourceSelect'),type, formData.get('pageCountSelect'))
+    .then(({articles}) => {
+        renderNews(articles);
+        loadArticles = articles;
+    })
+    .catch(error => console.error(error));    
+};
 
-const loadArticles = (count, category) => {
+const enableButton = () => {
+    const everything = document.querySelector('#loadEverything');
+    const topArticle = document.querySelector('#loadTopArticle');
+    everything.addEventListener('click', createCustomQuery);
+    everything.disabled = false;
+    topArticle.addEventListener('click', createCustomQuery);
+    topArticle.disabled = false;
+}
+
+const loadArticles = (category, count = 10) => {
     getArticle(count, category)
         .then(({articles}) => {
             renderNews(articles);
-            loadedArticles = articles;
+            loadedArticles = articles || [];
         })
         .catch(error => console.error(error));
 };
@@ -36,8 +49,9 @@ const loadArticles = (count, category) => {
 const loadSources = () => {
     getSources()
         .then(({sources}) => renderSource(sources))
+        .then( () => enableButton())
         .catch(error => console.error(error))
 };
 
-loadArticles(10, 'general');
+loadArticles('general');
 loadSources();

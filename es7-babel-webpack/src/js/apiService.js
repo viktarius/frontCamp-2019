@@ -11,13 +11,13 @@ async function getArticle(count, category) {
     return await response.json();
 }
 
-async function customQuery(_country, _source, _language, _text){
-    const params = [];
+async function customQuery(_country, _source, type, pageSize = 10){
+    const params = ['pageSize='+pageSize];
     !(+_country === 0) ? params.push('country=' + _country) : '';
     !(+_source === 0) ? params.push('domains=' + _source) : '';
-    !(+_language === 0) ? params.push('language=' + _language) : '';
-    _text ? params.push('&q=' + _text) : '';
-    return `${URL}/everything?${params.join('&')}&pageSize=10&apiKey=${API_KEY}`;
+    const url = `${URL}/${type}?${params.join('&')}&apiKey=${API_KEY}`;
+    const response = await fetch(url);
+    return await response.json();
 }
 
 export {getArticle, getSources, customQuery}

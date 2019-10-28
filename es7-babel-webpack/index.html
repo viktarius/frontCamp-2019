@@ -35,12 +35,16 @@
                         <option selected value="0">none</option>
                     </select>
                 </label>
-                <label for="languageSelect">language
-                    <select name="languageSelect" id="languageSelect">
-                        <option selected value="0">none</option>
+                <label for="pageCountSelect">page count
+                    <select name="pageCountSelect" id="pageCountSelect">
+                        <option selected value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
                     </select>
                 </label>
-                <button>search</button>
+                <button type="button" id="loadTopArticle" disabled>search top</button>
+                <button type="button" id="loadEverything" disabled>search everything</button>
             </form>
         </div>
         <div id="articles">
