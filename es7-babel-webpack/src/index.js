@@ -1,6 +1,8 @@
 import {getSources, getArticle, customQuery} from './js/apiService';
 import {renderSource, renderNews, renderArticle} from "./js/render";
 
+
+const form = document.getElementById('customQuery');
 let loadedArticles;
 
 document.querySelector("#link-list").addEventListener('click', function (event) {
@@ -23,22 +25,27 @@ const createCustomQuery = (event) => {
     customQuery(formData.get('countrySelect'), formData.get('resourceSelect'),type, formData.get('pageCountSelect'))
     .then(({articles}) => {
         renderNews(articles);
-        loadArticles = articles;
+        loadedArticles = articles || [];
     })
     .catch(error => console.error(error));    
 };
 
 const enableButton = () => {
-    const everything = document.querySelector('#loadEverything');
-    const topArticle = document.querySelector('#loadTopArticle');
-    everything.addEventListener('click', createCustomQuery);
-    everything.disabled = false;
-    topArticle.addEventListener('click', createCustomQuery);
-    topArticle.disabled = false;
+    form.querySelector('button').disabled = false;
 }
 
-const loadArticles = (category, count = 10) => {
-    getArticle(count, category)
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    customQuery(formData.get('resourceSelect'), formData.get('pageCountSelect'))
+    .then(({articles}) => {
+        renderNews(articles);
+        loadedArticles = articles || [];
+    })
+})
+
+const loadArticles = (category) => {
+    getArticle(category)
         .then(({articles}) => {
             renderNews(articles);
             loadedArticles = articles || [];
@@ -49,7 +56,7 @@ const loadArticles = (category, count = 10) => {
 const loadSources = () => {
     getSources()
         .then(({sources}) => renderSource(sources))
-        .then( () => enableButton())
+        .then( () => enableButton(form))
         .catch(error => console.error(error))
 };
 

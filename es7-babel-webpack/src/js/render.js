@@ -15,7 +15,7 @@ const getArticleLayout = article => {
             <img src="${article.urlToImage}" alt="">
         </div>
         <div class="info">
-            <a href="${article.url}" target="_blank">source</a>
+            <p> read more: <a href="${article.url}" target="_blank">source</a></p>
             <p>${article.author}</p>
         </div>`
 };
@@ -33,13 +33,10 @@ const appendOption = (target, set) => {
 
 const renderSource = (sources) => {
     console.table(sources);
-    const countrySet = new Set();
     const resourceSet = new Set();
     for (const source of sources) {
-        countrySet.add(source.country);
-        resourceSet.add(source.url);
+        resourceSet.add(source.id);
     }
-    appendOption('countrySelect', countrySet);
     appendOption('resourceSelect', resourceSet);
 };
 
