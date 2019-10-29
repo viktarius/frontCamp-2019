@@ -15,9 +15,9 @@ document
   .querySelector('#link-list')
   .addEventListener('click', handleHeaderClick);
 
-const handleArticlesClick = event => {
-  if (event.target.closest('.article')) {
-    const article = event.target.closest('.article');
+const handleArticlesClick = ({ target }) => {
+  if (target.closest('.article')) {
+    const article = target.closest('.article');
     const articleId = article.dataset.articleid;
     renderArticle(loadedArticles[articleId]);
   }
