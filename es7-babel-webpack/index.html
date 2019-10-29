@@ -1,60 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-</head>
-<body>
-<div id="wrap">
-
-    <header>
+    <script defer src="dist/main.bundle.js"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <header>
         <nav>
-            <ul id="link-list">
-                <li><a class="link" href="/">home</a></li>
-                <li><a class="link" href="/health">health</a></li>
-                <li><a class="link" href="/science">science</a></li>
-                <li><a class="link" href="/sports">sports</a></li>
-                <li><a class="link" href="/technology">technology</a></li>
-            </ul>
+          <ul id="link-list">
+            <li><a class="link" href="/">home</a></li>
+            <li><a class="link" href="/health">health</a></li>
+            <li><a class="link" href="/science">science</a></li>
+            <li><a class="link" href="/sports">sports</a></li>
+            <li><a class="link" href="/technology">technology</a></li>
+          </ul>
         </nav>
-    </header>
-    <main>
+      </header>
+      <main>
         <div id="params">
-            <h3>custom query</h3>
-            <form action="" id="customQuery">
-                <label for="resourceSelect">resource
-                    <select name="resourceSelect" id="resourceSelect">
-                        <option selected value="0">none</option>
-                    </select>
-                </label>
-                <label for="pageCountSelect">page count
-                    <select name="pageCountSelect" id="pageCountSelect">
-                        <option selected value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </label>
-                <button disabled>search</button>
-            </form>
+          <h3>custom query</h3>
+          <form action="" id="customQuery">
+            <label for="resourceSelect"
+              >resource
+              <select name="resourceSelect" id="resourceSelect">
+                <option selected value="0">none</option>
+              </select>
+            </label>
+            <label for="pageCountSelect"
+              >page count
+              <select name="pageCountSelect" id="pageCountSelect">
+                <option selected value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </label>
+            <button disabled>search</button>
+          </form>
         </div>
-        <div id="articles">
-
-        </div>
-        <div id="article">
-
-        </div>
-    </main>
-</div>
-
-<footer>
-    <p>frontCamp 2019</p>
-    <p>Belski Viktar</p>
-</footer>
-
-<script src="dist/main.bundle.js"></script>
-</body>
+        <div id="articles"></div>
+        <div id="article"></div>
+      </main>
+    </div>
+    <footer>
+      <p>frontCamp 2019</p>
+      <p>Belski Viktar</p>
+    </footer>
+  </body>
 </html>

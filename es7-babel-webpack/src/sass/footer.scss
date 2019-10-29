@@ -1,15 +1,14 @@
-footer{
+footer {
   height: 80px;
   background-color: $main-color;
   margin-top: -80px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
   color: $second-text-color;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  p{
+  p {
     font-size: 20px;
   }
 }

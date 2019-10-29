@@ -1,30 +1,33 @@
-@import "variables";
-@import "header";
-@import "params";
-@import "articles";
-@import "article";
-@import "footer";
+@import 'variables';
+@import 'header';
+@import 'params';
+@import 'articles';
+@import 'article';
+@import 'footer';
 
-body, html, *{
+body,
+html,
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body{
+html,
+body {
   height: 100%;
 }
 
-body{
+body {
   color: $main-text-color;
   background-color: $background-color;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#wrap{
+#wrap {
   min-height: 100%;
 }
 
-main{
+main {
   padding-bottom: 100px;
 }
