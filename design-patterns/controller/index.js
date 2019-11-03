@@ -1,5 +1,7 @@
 import FactoryServiceProxy from './js/services/factoryService';
 import {renderSource, renderNews, renderArticle} from './js/render';
+import articlesModel from '../model/ArtcilesModel';
+import articlesView from '../view/ArticlesView';
 
 const getService = new FactoryServiceProxy('get');
 const form = document.getElementById('customQuery');
@@ -35,7 +37,7 @@ const handleArticlesClick = ({target}) => {
     if (target.closest('.article')) {
         const article = target.closest('.article');
         const articleId = article.dataset.articleid;
-        renderArticle(loadedArticles[articleId]);
+        renderArticle(articlesModel.getSpecificArticle(articleId));
     }
 };
 
@@ -54,7 +56,9 @@ const handleSubmitForm = event => {
         formData.get('resourceSelect'),
         formData.get('pageCountSelect')
     ).then(({articles}) => {
-        renderNews(articles);
+        articlesView.renderArticles(articles);
+        // renderNews(articles);
+        articlesModel.articles = articles;
         loadedArticles = articles || [];
     });
 };
@@ -64,7 +68,9 @@ form.addEventListener('submit', handleSubmitForm);
 const loadArticles = category => {
     getService.getArticle(category)
         .then(({articles}) => {
-            renderNews(articles);
+            articlesView.renderArticles(articles);
+            // renderNews(articles);
+            articlesModel.articles = articles;
             loadedArticles = articles || [];
         })
         .catch(error => errorHandler(error.message));

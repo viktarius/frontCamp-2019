@@ -39,7 +39,7 @@ const renderSource = sources => {
 };
 
 const renderNews = articles => {
-  if (!articles.lenght) {
+  if (!articles.length) {
     articlesPlace.innerHTML = 'Не удалось получить статьи';
   }
   articlesPlace.innerHTML = articles
