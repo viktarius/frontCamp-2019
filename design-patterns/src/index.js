@@ -1,12 +1,16 @@
-import { factoryApi } from './js/services/factoryService';
+import FactoryServiceProxy from './js/services/factoryService';
 import { renderSource, renderNews, renderArticle } from './js/render';
 import errorSingleton from './js/errorHandler';
 
-const getService = factoryApi.create('get');
-console.log(getService);
-console.log(factoryApi);
+const getService = new FactoryServiceProxy('get');
 const form = document.getElementById('customQuery');
 let loadedArticles;
+
+try {
+  const proxyTest = API_KEY in getService;
+}catch (e) {
+  errorSingleton.showError(e.message)
+}
 
 const handleHeaderClick = event => {
   event.preventDefault();
@@ -66,11 +70,11 @@ const loadSources = () => {
 };
 
 // console.log(errorSingleton);
-errorSingleton.showError('errorTEXT');
-
-setTimeout(()=>{
-  errorSingleton.showError('errorTEXT213123123');
-},5000);
+// errorSingleton.showError('errorTEXT');
+//
+// setTimeout(()=>{
+//   errorSingleton.showError('errorTEXT213123123');
+// },5000);
 
 loadArticles('general');
 loadSources();
