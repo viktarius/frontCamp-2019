@@ -1,8 +1,10 @@
-import { factoryApi } from './js/factoryService';
+import { factoryApi } from './js/services/factoryService';
 import { renderSource, renderNews, renderArticle } from './js/render';
 import errorSingleton from './js/errorHandler';
 
 const getService = factoryApi.create('get');
+console.log(getService);
+console.log(factoryApi);
 const form = document.getElementById('customQuery');
 let loadedArticles;
 
