@@ -1,7 +1,10 @@
 const Error = function () {
     if (Error.instance) return Error.instance;
     const errorBlock = document.getElementById('error');
-
+    const hideMessage = () => {
+        errorBlock.style.visibility = 'hidden';
+    };
+    errorBlock.querySelector('.error--close').addEventListener('click', hideMessage);
     this.lastError = '';
     this.showError = function (text, title = 'Wooops') {
         errorBlock.style.visibility = 'visible';

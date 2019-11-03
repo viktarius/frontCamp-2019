@@ -1,80 +1,79 @@
 import FactoryServiceProxy from './js/services/factoryService';
-import { renderSource, renderNews, renderArticle } from './js/render';
-import errorSingleton from './js/errorHandler';
+import {renderSource, renderNews, renderArticle} from './js/render';
 
 const getService = new FactoryServiceProxy('get');
 const form = document.getElementById('customQuery');
 let loadedArticles;
 
+const errorHandler = (message) => {
+    import('./js/errorHandler')
+        .then(errorModule => errorModule.default)
+        .then(handler => handler.showError(message));
+};
+
+// only for show case
 try {
-  const proxyTest = API_KEY in getService;
-}catch (e) {
-  errorSingleton.showError(e.message)
+    delete getService.API_KEY;
+} catch (e) {
+    errorHandler(e.message);
 }
 
 const handleHeaderClick = event => {
-  event.preventDefault();
-  const category =
-    event.target.innerHTML === 'home' ? 'general' : event.target.innerHTML;
-  loadArticles(category);
+    event.preventDefault();
+    const category =
+        event.target.innerHTML === 'home' ? 'general' : event.target.innerHTML;
+    loadArticles(category);
 };
 
 document
-  .querySelector('#link-list')
-  .addEventListener('click', handleHeaderClick);
+    .querySelector('#link-list')
+    .addEventListener('click', handleHeaderClick);
 
-const handleArticlesClick = ({ target }) => {
-  if (target.closest('.article')) {
-    const article = target.closest('.article');
-    const articleId = article.dataset.articleid;
-    renderArticle(loadedArticles[articleId]);
-  }
+const handleArticlesClick = ({target}) => {
+    if (target.closest('.article')) {
+        const article = target.closest('.article');
+        const articleId = article.dataset.articleid;
+        renderArticle(loadedArticles[articleId]);
+    }
 };
 
 document
-  .querySelector('#articles')
-  .addEventListener('click', handleArticlesClick);
+    .querySelector('#articles')
+    .addEventListener('click', handleArticlesClick);
 
 const enableButton = () => {
-  form.querySelector('button').disabled = false;
+    form.querySelector('button').disabled = false;
 };
 
 const handleSubmitForm = event => {
-  event.preventDefault();
-  const formData = new FormData(event.target);
-  getService.customQuery(
-    formData.get('resourceSelect'),
-    formData.get('pageCountSelect')
-  ).then(({ articles }) => {
-    renderNews(articles);
-    loadedArticles = articles || [];
-  });
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    getService.customQuery(
+        formData.get('resourceSelect'),
+        formData.get('pageCountSelect')
+    ).then(({articles}) => {
+        renderNews(articles);
+        loadedArticles = articles || [];
+    });
 };
 
 form.addEventListener('submit', handleSubmitForm);
 
 const loadArticles = category => {
-  getService.getArticle(category)
-    .then(({ articles }) => {
-      renderNews(articles);
-      loadedArticles = articles || [];
-    })
-    .catch(error => console.error(error));
+    getService.getArticle(category)
+        .then(({articles}) => {
+            renderNews(articles);
+            loadedArticles = articles || [];
+        })
+        .catch(error => errorHandler(error.message));
 };
 
 const loadSources = () => {
-  getService.getSources()
-    .then(({ sources }) => renderSource(sources))
-    .then(() => enableButton(form))
-    .catch(error => console.error(error));
+    getService.getSources()
+        .then(({sources}) => renderSource(sources))
+        .then(() => enableButton(form))
+        .catch(error => errorHandler(error.message));
 };
-
-// console.log(errorSingleton);
-// errorSingleton.showError('errorTEXT');
-//
-// setTimeout(()=>{
-//   errorSingleton.showError('errorTEXT213123123');
-// },5000);
 
 loadArticles('general');
 loadSources();
