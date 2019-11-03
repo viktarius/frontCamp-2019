@@ -12,11 +12,13 @@ const errorHandler = (message) => {
 };
 
 // only for show case
-try {
-    delete getService.API_KEY;
-} catch (e) {
-    errorHandler(e.message);
-}
+setTimeout(() => {
+    try {
+        delete getService.API_KEY;
+    } catch (e) {
+        errorHandler(e.message);
+    }
+}, 5000);
 
 const handleHeaderClick = event => {
     event.preventDefault();
