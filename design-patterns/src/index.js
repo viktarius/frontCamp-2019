@@ -1,6 +1,8 @@
-import { getSources, getArticle, customQuery } from './js/apiService';
+import { factoryApi } from './js/factoryService';
 import { renderSource, renderNews, renderArticle } from './js/render';
+import errorSingleton from './js/errorHandler';
 
+const getService = factoryApi.create('get');
 const form = document.getElementById('customQuery');
 let loadedArticles;
 
@@ -34,7 +36,7 @@ const enableButton = () => {
 const handleSubmitForm = event => {
   event.preventDefault();
   const formData = new FormData(event.target);
-  customQuery(
+  getService.customQuery(
     formData.get('resourceSelect'),
     formData.get('pageCountSelect')
   ).then(({ articles }) => {
@@ -46,7 +48,7 @@ const handleSubmitForm = event => {
 form.addEventListener('submit', handleSubmitForm);
 
 const loadArticles = category => {
-  getArticle(category)
+  getService.getArticle(category)
     .then(({ articles }) => {
       renderNews(articles);
       loadedArticles = articles || [];
@@ -55,11 +57,18 @@ const loadArticles = category => {
 };
 
 const loadSources = () => {
-  getSources()
+  getService.getSources()
     .then(({ sources }) => renderSource(sources))
     .then(() => enableButton(form))
     .catch(error => console.error(error));
 };
+
+// console.log(errorSingleton);
+errorSingleton.showError('errorTEXT');
+
+setTimeout(()=>{
+  errorSingleton.showError('errorTEXT213123123');
+},5000);
 
 loadArticles('general');
 loadSources();

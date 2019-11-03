@@ -1,0 +1,18 @@
+const Error = function () {
+    if (Error.instance) return Error.instance;
+    const errorBlock = document.getElementById('error');
+
+    this.showError = function (text, title = 'Wooops') {
+        errorBlock.style.visibility = 'visible';
+        errorBlock.querySelector('.error--title').innerHTML = title;
+        errorBlock.querySelector('.error--message').innerHTML = text;
+        setTimeout(() => {
+            errorBlock.style.visibility = 'hidden';
+        }, 10000)
+    };
+    return Error.instance = this;
+};
+
+const errorHandler = new Error();
+
+export default errorHandler;
