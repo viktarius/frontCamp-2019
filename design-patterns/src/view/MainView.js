@@ -30,20 +30,43 @@ export default class ArticlesView extends EventEmitter {
     elements.linkList.addEventListener('click', e =>
       this.emit('categoryChange', e)
     );
+    elements.customQueryForm.addEventListener('submit', e =>
+      this.emit('customQueryFormChange', e)
+    );
+    elements.articlesList.addEventListener('click', e =>
+      this.emit('articleSelect', e)
+    );
 
-    model.on('articlesChange', () => this.renderArticles());
+    model.sourcesModel.on('sourcesChange', () => this.renderSources());
+    model.articlesModel.on('articlesChange', () => this.renderArticles());
+    model.articlesModel.on('articleChange', () => this.renderArticle());
   }
 
   renderArticles() {
-    if (!this._model.articles.length) {
+    if (!this._model.articlesModel.articles.length) {
       this._articlesPlace.innerHTML = 'Не удалось получить статьи';
     }
-    this._articlesPlace.innerHTML = this._model.articles
+    this._articlesPlace.innerHTML = this._model.articlesModel.articles
       .map((article, index) => getArticlesLayout(article, index))
       .join('');
   }
 
-  renderArticle(article) {
-    articlePlace.innerHTML = getArticleLayout(article);
+  renderSources() {
+    const select = document.getElementById('resourceSelect');
+    this._model.sourcesModel.sources.forEach(source => {
+      const option = document.createElement('option');
+      option.source = source;
+      option.text = source;
+      select.add(option);
+    });
+    document
+      .getElementById('customQuery')
+      .querySelector('button').disabled = false;
+  }
+
+  renderArticle() {
+    this._articlePlace.innerHTML = getArticleLayout(
+      this._model.articlesModel.article
+    );
   }
 }

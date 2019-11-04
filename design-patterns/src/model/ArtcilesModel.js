@@ -5,6 +5,7 @@ export default class ArticlesModel extends EventEmitter {
     super();
     this._articles = articles || [];
     this._category = 'general';
+    this._article = null;
   }
 
   get articles() {
@@ -24,7 +25,12 @@ export default class ArticlesModel extends EventEmitter {
     this._category = category;
   }
 
-  getSpecificArticle(id) {
-    return this._articles[id];
+  get article() {
+    return this._article;
+  }
+
+  set article(id) {
+    this._article = this._articles[id];
+    this.emit('articleChange', this._articles[id]);
   }
 }
