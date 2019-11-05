@@ -14,6 +14,7 @@ const models = {
   sourcesModel: new SourcesModel()
 };
 
+// MVC
 window.addEventListener('load', () => {
   const mainView = new MainView(models, elements);
   const controller = new MainController(models, mainView);
