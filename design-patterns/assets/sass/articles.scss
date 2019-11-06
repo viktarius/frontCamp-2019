@@ -1,0 +1,23 @@
+#articles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.article {
+  width: calc(100% / 5);
+  min-width: 320px;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.5s ease-out;
+  max-height: 300px;
+  background-color: $background-article-color;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    padding: 0;
+  }
+}

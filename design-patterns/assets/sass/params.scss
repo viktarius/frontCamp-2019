@@ -1,0 +1,36 @@
+#params {
+  padding: 30px 0;
+  background-color: $second-text-color;
+  h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    label {
+      min-width: 200px;
+      text-align: center;
+      padding: 4px 0;
+    }
+    select {
+      min-width: 100px;
+      padding: 4px 6px;
+      margin-left: 10px;
+    }
+    button {
+      background-color: $main-color;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      color: $second-text-color;
+      &:disabled {
+        background-color: $background-color;
+      }
+    }
+  }
+}

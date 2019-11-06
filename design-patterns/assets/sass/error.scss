@@ -1,0 +1,30 @@
+#error {
+  background-color: white;
+  position: absolute;
+  right: 10px;
+  bottom: 90px;
+  min-width: 200px;
+  visibility: hidden;
+}
+
+.error {
+
+  &--title {
+    padding: 5px 10px;
+  }
+
+  &--close {
+    position: absolute;
+    top: 0;
+    font-size: 24px;
+    right: 3px;
+    cursor: pointer;
+    &:hover{
+      color: red;
+    }
+  }
+
+  &--message {
+    padding: 20px 10px;
+  }
+}
