@@ -34,6 +34,3 @@ Request answer:      { "_id" : ObjectId("5dc5dd75e38a5c52293539f1"), "borough" :
                      { "_id" : ObjectId("5dc5dd75e38a5c5229354d3c"), "borough" : "Manhattan" }
                      { "_id" : ObjectId("5dc5dd76e38a5c5229355175"), "borough" : "Queens" }
                      { "_id" : ObjectId("5dc5dd76e38a5c5229355275"), "borough" : "Queens" }
-
-4.
-
