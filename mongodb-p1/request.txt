@@ -13,24 +13,7 @@ Request:db.restaurants.find({"grades.8.score": {$lt: 7}}, {name: 1})
 Request answer:     { "_id" : ObjectId("5dc5dd76e38a5c522935619c"), "name" : "Silver Krust West Indian Restaurant" }
                     { "_id" : ObjectId("5dc5dd76e38a5c5229356fbc"), "name" : "Pure Food" }
 5. What are _id and borough of “Seafood” (cuisine) restaurants which received at least one “B” grade in period from 2014-02-01 to 2014-03-01? Use projection to include only _id and borough.
-Request:             db.restaurants.find({cuisine: "Seafood", "grades.grade": "B", "grades.date":{$gte:ISODate("2014-02-01"), $lt:ISODate("2014-03-01")}}, {_id: 1, borough: 1})
-Request answer:      { "_id" : ObjectId("5dc5dd75e38a5c52293539f1"), "borough" : "Queens" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c52293539f9"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229353a31"), "borough" : "Bronx" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229353aa4"), "borough" : "Bronx" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229353b1e"), "borough" : "Brooklyn" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229353e21"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c522935419c"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c52293542c0"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c522935444b"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c522935453e"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c522935459b"), "borough" : "Brooklyn" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c52293545c2"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229354885"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c52293548d8"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229354904"), "borough" : "Queens" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229354974"), "borough" : "Brooklyn" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c52293549e2"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd75e38a5c5229354d3c"), "borough" : "Manhattan" }
-                     { "_id" : ObjectId("5dc5dd76e38a5c5229355175"), "borough" : "Queens" }
-                     { "_id" : ObjectId("5dc5dd76e38a5c5229355275"), "borough" : "Queens" }
+Request:             db.restaurants.find({cuisine: "Seafood", grades: { $elemMatch: {date: {$gte: ISODate("2014-02-01"), $lte: ISODate("2014-03-01")}, grade: "B" }}}, {borough: 1})
+Request answer:      { "_id" : ObjectId("5dc5dd76e38a5c5229356e7f"), "borough" : "Bronx" }
+                     { "_id" : ObjectId("5dc5dd76e38a5c5229357101"), "borough" : "Manhattan" }
+
