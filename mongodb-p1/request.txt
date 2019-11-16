@@ -16,4 +16,3 @@ Request answer:     { "_id" : ObjectId("5dc5dd76e38a5c522935619c"), "name" : "Si
 Request:             db.restaurants.find({cuisine: "Seafood", grades: { $elemMatch: {date: {$gte: ISODate("2014-02-01"), $lte: ISODate("2014-03-01")}, grade: "B" }}}, {borough: 1})
 Request answer:      { "_id" : ObjectId("5dc5dd76e38a5c5229356e7f"), "borough" : "Bronx" }
                      { "_id" : ObjectId("5dc5dd76e38a5c5229357101"), "borough" : "Manhattan" }
-
