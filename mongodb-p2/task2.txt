@@ -1,0 +1,30 @@
+Inspect a few of the documents to get a basic understanding of the structure. Enron was an American corporation that engaged in a widespread accounting fraud and subsequently failed.
+In this dataset, each document is an email message. Like all Email messages, there is one sender but there can be multiple recipients.
+For this task you will use the aggregation framework to figure out pairs of people that tend to communicate a lot. To do this, you will need to unwind the To list for each message.
+This problem is a little tricky because a recipient may appear more than once in the To list for a message. You will need to fix that in a stage of the aggregation before doing your grouping and counting of (sender, recipient) pairs.
+Which pair of people have the greatest number of messages in the dataset?
+For you reference the number of messages from phillip.love@enron.co to sladanaanna.kulic@enron.com is 144.
+
+Request:            db.enron.aggregate([{$unwind: "$headers.To"}, {$group: { _id: {to: "$headers.To", from: "$headers.From"}, total: {$sum: 1}}}, {$project: { _id: 0, from: "$_id.from", to: "$_id.to", total: 1}}])
+Request answer:     { "total" : 2, "from" : "johnj@bcjlaw.com", "to" : "yukon95813@aol.com" }
+                    { "total" : 6, "from" : "steffes@enron.com", "to" : "tim.belden@enron.com" }
+                    { "total" : 2, "from" : "amy.fitzpatrick@enron.com", "to" : "kenton.erwin@enron.com" }
+                    { "total" : 2, "from" : "abb@eslawfirm.com", "to" : "frank.derosa@gen.pge.com" }
+                    { "total" : 10, "from" : "adarsh.vakharia@enron.com", "to" : "l'sheryl.hudson@enron.com" }
+                    { "total" : 4, "from" : "sonya.johnson@enron.com", "to" : "mary.schoen@enron.com" }
+                    { "total" : 1, "from" : "mrudula.gadade@enron.com", "to" : "mark.palmer@enron.com" }
+                    { "total" : 1, "from" : "greg.miller@crossmark.com", "to" : "e-mail <.cheri@enron.com>" }
+                    { "total" : 3, "from" : "burrosale@hotmail.com", "to" : "divabrown@hotmail.com" }
+                    { "total" : 1, "from" : "ben.jacoby@enron.com", "to" : "john.hodge@enron.com" }
+                    { "total" : 1, "from" : "ken.shulklapper@enron.com", "to" : "jay.reitmeyer@enron.com" }
+                    { "total" : 11, "from" : "laura.luce@enron.com", "to" : "louise.kitchen@enron.com" }
+                    { "total" : 4, "from" : "rch8@pge.com", "to" : "burkee@cts.com" }
+                    { "total" : 1, "from" : "bmj@michelsonrealty.com", "to" : "eterson@cedarllc.com" }
+                    { "total" : 1, "from" : "jane.burnap@intermat.com", "to" : "impact@ktc.com" }
+                    { "total" : 3, "from" : "jessica@teamgolf.com", "to" : "spb@yahoo.com" }
+                    { "total" : 2, "from" : "jshohet@graycary.com", "to" : "tanya.murphy@neg.pge.com" }
+                    { "total" : 1, "from" : "jeff.skilling@enron.com", "to" : "elizabeth.labanowski@enron.com" }
+                    { "total" : 1, "from" : "hector.mcloughlin@enron.com", "to" : "robert.ramirez@enron.com" }
+                    { "total" : 9, "from" : "jkeffer@kslaw.com", "to" : "michael.young@northwestern.com" }
+
+
