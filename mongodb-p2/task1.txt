@@ -1,0 +1,45 @@
+1. How many records does each airline class have? Use $project to show result as { class: "Z", total: 999 }
+Request:            db.airlines.aggregate([{$group: {_id: "$class", total: {$sum: 1}}}, {$project: {_id:0, class: "$_id", total: "$total"}}])
+Request answer:     { "class" : "F", "total" : 140343 }
+                    { "class" : "G", "total" : 17499 }
+                    { "class" : "P", "total" : 5683 }
+                    { "class" : "L", "total" : 23123 }
+2. What are the top 3 destination cities outside of the United States (destCountry field, not included) with the highest average passengers count? Show result as { "avgPassengers" : 2312.380, "city" : "Minsk, Belarus" }
+Request:            db.airlines.aggregate([{$match: {"originCountry": {$ne: "United States"}}}, {$group: {_id: "$originCity", avgPassengers: {$avg: "$passengers"}}}, {$sort: {"avgPassengers": -1}},{$limit: 3},{$project: {_id: 0, city:"$_id", avg: "$avgPassengers"}}], {allowDiskUse: true})
+Request answer:     { "city" : "Dubai, United Arab Emirates", "avg" : 9143.542857142857 }
+                    { "city" : "Abu Dhabi, United Arab Emirates", "avg" : 8284.636363636364 }
+                    { "city" : "London, United Kingdom", "avg" : 7009.950437317784 }
+3. Which carriers provide flights to Latvia (destCountry)? Show result as one document { "_id" : "Latvia", "carriers" : [ "carrier1", " carrier2", …] }
+Request:            db.airlines.aggregate([{$group: {_id: "$destCountry", carriers: {$push: "$carrier"}}}, {$match: {_id: {$eq: "Latvia"}}}])
+Request answer:     { "_id" : "Latvia", "carriers" : [ "JetClub AG", "Blue Jet SP Z o o", "Uzbekistan Airways", "Uzbekistan Airways", "Uzbekistan Airways", "Uzbekistan Airways", "Uzbekistan Airways", "Uzbekistan Airways", "Uzbekistan Airways" ] }
+4. What are the carriers which flue the most number of passengers from the United State to either Greece, Italy or Spain? Find top 10 carriers, but provide the last 7 carriers (do not include the first 3). Show result as { "_id" : "<carrier>", "total" : 999}
+Request:            db.airlines.aggregate([{$match: { $or: [{"destCountry": "Greece"}, {"destCountry": "Italy"}, {"destCountry": "Spain"}]}}, {$group: {_id: "$carrier", avgPassenger: { $avg: "$passengers" }}}, {$sort: {"avgPassenger": -1}}, {$skip: 3}, {$limit: 7}])
+Request answer:     { "_id" : "United Air Lines Inc.", "avgPassenger" : 5109.688888888889 }
+                    { "_id" : "Air Europa", "avgPassenger" : 4748.4 }
+                    { "_id" : "American Airlines Inc.", "avgPassenger" : 3567.2974683544303 }
+                    { "_id" : "Delta Air Lines Inc.", "avgPassenger" : 3427.456 }
+                    { "_id" : "Meridiana S.p.A", "avgPassenger" : 3384.6666666666665 }
+                    { "_id" : "Norwegian Air Shuttle ASA", "avgPassenger" : 2224 }
+                    { "_id" : "Gainjet Aviation SA", "avgPassenger" : 7 }
+5. Find the city (originCity) with the highest sum of passengers for each state (originState) of the United States (originCountry). Provide the city for the first 5 states ordered by state alphabetically (you should see the city for Alaska, Arizona and etc). Show result as { "totalPassengers" : 999, "location" : { "state" : "abc", "city" : "xyz"} }
+Request:            db.airlines.aggregate([{$match: {"originCountry": {$eq: "United States"}}}, {$group: {_id: "$originState", items: {$push: {city: "$originCity", pass: "$passengers",state: "$originState"}}}}, {$sort: {_id: 1}}, {$limit: 5}, {$unwind: "$items"}, {$group: {_id: "$items.city", avg: {$avg: "$items.pass"}, state: {$first: "$items.state"}}}, {$project: {_id: 0, totalPassengers: "$avg", location: {city: "$_id", state: "$state"}}}, {$sort: {"location.state": 1}}])
+Request answer:     { "totalPassengers" : 1695.8846153846155, "location" : { "city" : "Montgomery, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 1461.4313725490197, "location" : { "city" : "Huntsville, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 0, "location" : { "city" : "Talladega, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 15, "location" : { "city" : "Gulf Shores, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 15, "location" : { "city" : "Auburn, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 0, "location" : { "city" : "Decatur, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 1600.2526315789473, "location" : { "city" : "Birmingham, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 39.6875, "location" : { "city" : "Tuscaloosa, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 26.818181818181817, "location" : { "city" : "Anniston, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 1238.2272727272727, "location" : { "city" : "Dothan, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 0, "location" : { "city" : "Gadsden, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 1939.215909090909, "location" : { "city" : "Mobile, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 255.33333333333334, "location" : { "city" : "Muscle Shoals, AL", "state" : "Alabama" } }
+                    { "totalPassengers" : 141.55263157894737, "location" : { "city" : "Yakutat, AK", "state" : "Alaska" } }
+                    { "totalPassengers" : 1.6, "location" : { "city" : "Port Bailey, AK", "state" : "Alaska" } }
+                    { "totalPassengers" : 15.363636363636363, "location" : { "city" : "False Pass, AK", "state" : "Alaska" } }
+                    { "totalPassengers" : 37.85526315789474, "location" : { "city" : "Point Hope, AK", "state" : "Alaska" } }
+                    { "totalPassengers" : 0.5555555555555556, "location" : { "city" : "Central, AK", "state" : "Alaska" } }
+                    { "totalPassengers" : 24.98181818181818, "location" : { "city" : "Brevig Mission, AK", "state" : "Alaska" } }
+                    { "totalPassengers" : 2.6666666666666665, "location" : { "city" : "Whale Pass, AK", "state" : "Alaska" } }
