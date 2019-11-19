@@ -5,26 +5,26 @@ This problem is a little tricky because a recipient may appear more than once in
 Which pair of people have the greatest number of messages in the dataset?
 For you reference the number of messages from phillip.love@enron.co to sladanaanna.kulic@enron.com is 144.
 
-Request:            db.enron.aggregate([{$unwind: "$headers.To"}, {$group: { _id: {to: "$headers.To", from: "$headers.From"}, total: {$sum: 1}}}, {$project: { _id: 0, from: "$_id.from", to: "$_id.to", total: 1}}])
-Request answer:     { "total" : 2, "from" : "johnj@bcjlaw.com", "to" : "yukon95813@aol.com" }
-                    { "total" : 6, "from" : "steffes@enron.com", "to" : "tim.belden@enron.com" }
-                    { "total" : 2, "from" : "amy.fitzpatrick@enron.com", "to" : "kenton.erwin@enron.com" }
-                    { "total" : 2, "from" : "abb@eslawfirm.com", "to" : "frank.derosa@gen.pge.com" }
-                    { "total" : 10, "from" : "adarsh.vakharia@enron.com", "to" : "l'sheryl.hudson@enron.com" }
-                    { "total" : 4, "from" : "sonya.johnson@enron.com", "to" : "mary.schoen@enron.com" }
-                    { "total" : 1, "from" : "mrudula.gadade@enron.com", "to" : "mark.palmer@enron.com" }
-                    { "total" : 1, "from" : "greg.miller@crossmark.com", "to" : "e-mail <.cheri@enron.com>" }
-                    { "total" : 3, "from" : "burrosale@hotmail.com", "to" : "divabrown@hotmail.com" }
-                    { "total" : 1, "from" : "ben.jacoby@enron.com", "to" : "john.hodge@enron.com" }
-                    { "total" : 1, "from" : "ken.shulklapper@enron.com", "to" : "jay.reitmeyer@enron.com" }
-                    { "total" : 11, "from" : "laura.luce@enron.com", "to" : "louise.kitchen@enron.com" }
-                    { "total" : 4, "from" : "rch8@pge.com", "to" : "burkee@cts.com" }
-                    { "total" : 1, "from" : "bmj@michelsonrealty.com", "to" : "eterson@cedarllc.com" }
-                    { "total" : 1, "from" : "jane.burnap@intermat.com", "to" : "impact@ktc.com" }
-                    { "total" : 3, "from" : "jessica@teamgolf.com", "to" : "spb@yahoo.com" }
-                    { "total" : 2, "from" : "jshohet@graycary.com", "to" : "tanya.murphy@neg.pge.com" }
-                    { "total" : 1, "from" : "jeff.skilling@enron.com", "to" : "elizabeth.labanowski@enron.com" }
-                    { "total" : 1, "from" : "hector.mcloughlin@enron.com", "to" : "robert.ramirez@enron.com" }
-                    { "total" : 9, "from" : "jkeffer@kslaw.com", "to" : "michael.young@northwestern.com" }
+Request:             db.enron.aggregate({ $project: { to: "$headers.To", from: "$headers.From" }}, { $unwind: "$to" }, { $group: { _id: { id: "$_id", from: "$from" }, to: { $addToSet: "$to" } } }, { $unwind: "$to" }, { $group: { _id: { from: "$_id.from", to: "$to" }, total: { $sum: 1 } } }, { $sort: { "total": -1 } })
+Request answer:     { "_id" : { "from" : "susan.mara@enron.com", "to" : "jeff.dasovich@enron.com" }, "total" : 750 }
+                    { "_id" : { "from" : "soblander@carrfut.com", "to" : "soblander@carrfut.com" }, "total" : 679 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "james.steffes@enron.com" }, "total" : 646 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "richard.shapiro@enron.com" }, "total" : 616 }
+                    { "_id" : { "from" : "evelyn.metoyer@enron.com", "to" : "kate.symes@enron.com" }, "total" : 567 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "karen.denne@enron.com" }, "total" : 552 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "alan.comnes@enron.com" }, "total" : 550 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "paul.kaufman@enron.com" }, "total" : 506 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "harry.kingerski@enron.com" }, "total" : 489 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "paul.kaufman@enron.com" }, "total" : 488 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "jdasovic@enron.com" }, "total" : 485 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "harry.kingerski@enron.com" }, "total" : 481 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "smara@enron.com" }, "total" : 467 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "mday@gmssr.com" }, "total" : 464 }
+                    { "_id" : { "from" : "susan.mara@enron.com", "to" : "sandra.mccubbin@enron.com" }, "total" : 464 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "steven.j.kean@enron.com" }, "total" : 460 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "bhansen@lhom.com" }, "total" : 457 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "rshapiro@enron.com" }, "total" : 457 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "james.d.steffes@enron.com" }, "total" : 454 }
+                    { "_id" : { "from" : "sgovenar@govadv.com", "to" : "acomnes@enron.com" }, "total" : 452 }
 
 
