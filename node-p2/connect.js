@@ -17,4 +17,11 @@ const newsSchema = new mongoose.Schema({
 });
 const News = mongoose.model('News', newsSchema);
 
-module.exports = {News};
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String
+});
+
+const Users = mongoose.model('Users', userSchema);
+
+module.exports = {News, Users};
