@@ -3,6 +3,7 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const logger = require('./logger');
 const {News} = require('./connect');
+const {checkId} = require('./errorHandler');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -19,12 +20,9 @@ app.get('/news', function (req, res) {
         .catch(error => console.error(error))
 });
 
-app.get('/news/:id', function (req, res, next) {
-    if (!+req.params.id) {
-        let err = new Error('Bad request');
-        next(err);
-    }
-    News.findOne({id: +req.params.id})
+app.get('/news/:id', function ({params: {id}}, res, next) {
+    checkId(id, next);
+    News.findOne({id: +id})
         .then(data => {
             if (!data) {
                 let err = new Error('News not found');
@@ -52,10 +50,7 @@ app.post('/news', function ({body: {title, content, author}}, res) {
 });
 
 app.put('/news/:id', function ({params: {id}, body: {title, content, author}}, res, next) {
-    if (!+id) {
-        let err = new Error('Bad request');
-        next(err);
-    }
+    checkId(id, next);
     const n = {};
     title ? n.title = title : false;
     content ? n.content = content : false;
@@ -68,6 +63,20 @@ app.put('/news/:id', function ({params: {id}, body: {title, content, author}}, r
                 next(err);
             } else{
                 res.send(data);
+            }
+        })
+});
+
+app.delete('/news/:id', function({params: {id}}, res, next){
+    checkId(id, next);
+    News.findOneAndRemove({id: +id})
+        .then(data => {
+            if (!data) {
+                let err = new Error('News not found');
+                err.statusCode = 404;
+                next(err);
+            } else{
+                res.send({status: 'ok'});
             }
         })
 });
