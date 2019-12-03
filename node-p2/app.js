@@ -19,30 +19,57 @@ app.get('/news', function (req, res) {
         .catch(error => console.error(error))
 });
 
-app.get('/news/:id', function (req, res) {
+app.get('/news/:id', function (req, res, next) {
     if (!+req.params.id) {
         let err = new Error('Bad request');
         next(err);
     }
     News.findOne({id: +req.params.id})
-        .then(data => res.send(data))
-        .catch(error => console.error(error))
+        .then(data => {
+            if (!data) {
+                let err = new Error('News not found');
+                err.statusCode = 404;
+                next(err);
+            }
+            res.send(data);
+        })
 });
 
 app.post('/news', function ({body: {title, content, author}}, res) {
     News.findOne()
         .sort({"id": -1})
         .then(lastNews => {
-        const n = {
-            id: lastNews.id+1,
-            title: title ? title : "",
-            content: content ? content : "",
-            author: author ? author : "",
-        };
-        return News.create(n);
-    }).then(data => {
+            const n = {
+                id: lastNews.id + 1,
+                title: title ? title : "",
+                content: content ? content : "",
+                author: author ? author : "",
+            };
+            return News.create(n);
+        }).then(data => {
         res.send({id: data.id});
     })
+});
+
+app.put('/news/:id', function ({params: {id}, body: {title, content, author}}, res, next) {
+    if (!+id) {
+        let err = new Error('Bad request');
+        next(err);
+    }
+    const n = {};
+    title ? n.title = title : false;
+    content ? n.content = content : false;
+    author ? n.author = author : false;
+    News.findOneAndUpdate({id: +id}, {id: +id, ...n}, {new: true})
+        .then(data => {
+            if (!data) {
+                let err = new Error('News not found');
+                err.statusCode = 404;
+                next(err);
+            } else{
+                res.send(data);
+            }
+        })
 });
 
 app.get('*', function (req, res, next) {
