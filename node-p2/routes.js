@@ -1,5 +1,7 @@
+require('dotenv').config();
 const path = require('path');
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const {News, Users} = require('./connect');
 const {checkId, checkData} = require('./handlers/errorHandler');
 
@@ -24,6 +26,14 @@ module.exports = (app, passport) => {
         failureRedirect: '/login',
         successRedirect: '/'
     }));
+
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', { failureRedirect: '/login' }),
+        function(req, res) {
+            res.redirect('/');
+        });
 
     app.post('/register', function ({body: {username, password}}, res, next) {
         Users.create({username, password})
@@ -101,6 +111,18 @@ module.exports = (app, passport) => {
                         return done(null, false);
                     }
                 })
+        }
+    ));
+
+    passport.use(new FacebookStrategy({
+            clientID: process.env.FACEBOOKAPP_ID,
+            clientSecret: process.env.FACEBOOKAPP_SECRET,
+            callbackURL: `http://localhost:${process.env.SERVERPORT}/auth/facebook/callback`
+        },
+        function(accessToken, refreshToken, profile, cb) {
+            Users.findOrCreate({ facebookId: profile.id }, function (err, user) {
+                return cb(err, user);
+            });
         }
     ));
 

@@ -19,8 +19,17 @@ const News = mongoose.model('News', newsSchema);
 
 const userSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
+    facebookId: Number
 });
+
+userSchema.statics.findOrCreate = function findOrCreate(condition, callback) {
+    const self = this;
+    console.log(condition);
+    self.findOne(condition, (err, result) => {
+        return result ? callback(err, result) : self.create(condition, (err, result) => { return callback(err, result) })
+    })
+};
 
 const Users = mongoose.model('Users', userSchema);
 
