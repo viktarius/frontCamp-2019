@@ -126,12 +126,12 @@ module.exports = (app, passport) => {
         }
     ));
 
-    passport.serializeUser((user, done) => {
-        done(null, user.username);
+    passport.serializeUser(function(user, done) {
+        done(null, user);
     });
 
-    passport.deserializeUser((username, done) => {
-        done(null, {username: username});
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
     });
 
     function isLoggedIn(req, res, next) {
