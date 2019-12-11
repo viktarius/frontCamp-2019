@@ -4,7 +4,6 @@ import './FilmPoster.scss';
 import './FilmsPosterResponsive.scss';
 
 export const FilmPoster = ({film: {title, genres, poster_path, release_date}}) => {
-    console.log(title);
     const year = release_date.split('-')[0];
     const genresOutput = genres.length === 2? genres.join('&') : genres.join(', ');
     return (
