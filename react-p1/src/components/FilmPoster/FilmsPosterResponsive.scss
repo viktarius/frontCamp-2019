@@ -1,0 +1,17 @@
+@media only screen and (min-width: 1360px) {
+  .film {
+    max-width: 25%;
+  }
+}
+
+@media only screen and (max-width: 790px) {
+  .film {
+    max-width: 50%;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .film {
+    max-width: 100%;
+  }
+}
