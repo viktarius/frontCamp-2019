@@ -14,7 +14,7 @@ class Films extends Component {
         }
     }
 
-    fetchData = (query='') => {
+    fetchData = (query = '') => {
         const {sortType} = this.props.sort;
         fetch('https://reactjs-cdp.herokuapp.com/movies' + query)
             .then(data => data.json())
@@ -26,21 +26,24 @@ class Films extends Component {
     };
 
     componentDidMount() {
-        this.fetchData();
+        const searchValue = this.props.search.value;
+        const searchBy = this.props.search.searchBy;
+        const query = (searchValue.trim() !== '') ? `search=${searchValue}&searchBy=${searchBy}` : '';
+        this.fetchData(query);
     }
 
     componentDidUpdate(prevProps, prevState) {
         const oldSortType = prevProps.sort.sortType;
-        const newSortType = this.props.sort.sortType;
         const oldSearchValue = prevProps.search.value;
+        const oldSearchBy = prevProps.search.searchBy;
+        const newSortType = this.props.sort.sortType;
         const newSearchValue = this.props.search.value;
-        const searchBy = this.props.search.searchBy;
-        console.log(oldSearchValue, newSearchValue);
+        const newSearchBy = this.props.search.searchBy;
         if (oldSortType !== newSortType) {
             this.setState({films: this.state.films.sort((a, b) => a[newSortType] < b[newSortType] ? 1 : -1)})
         }
-        if(oldSearchValue !== newSearchValue){
-            this.fetchData(`?search=${newSearchValue}&searchBy=${searchBy}`);
+        if (oldSearchValue !== newSearchValue || oldSearchBy !== newSearchBy) {
+            this.fetchData(`?search=${newSearchValue}&searchBy=${newSearchBy}`);
         }
     }
 

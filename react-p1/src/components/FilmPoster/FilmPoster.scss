@@ -1,13 +1,17 @@
 @import "../../constants/colors";
+.filmLink{
+  text-decoration: none;
+  max-width: 30%;
+  padding: 0;
+  margin: 0;
+}
 
 .film {
-  max-width: 30%;
   display: flex;
   flex-direction: column;
   color: $second-text-color;
   cursor: pointer;
   margin: 10px 20px;
-
   &--img {
     margin: 10px 20px;
     flex: 1;

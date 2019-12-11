@@ -5,10 +5,10 @@ import {Footer} from "../Footer/Footer";
 import Sort from "../Sort/Sort";
 import {Header} from "../Header/Header";
 
-function App() {
+function App({children}) {
     return (
         <div className="App">
-            <Header />
+            {children}
             <Sort/>
             <Films/>
             <Footer/>
