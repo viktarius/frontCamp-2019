@@ -1,3 +1,4 @@
 export const CHANGE_SORT_TYPE = 'CHANGE_SORT_TYPE';
 export const CHANGE_SEARCH_VALUE = 'CHANGE_SEARCH_VALUE';
 export const CHANGE_SEARCH_BY = 'CHANGE_SEARCH_BY';
+export const ERROR = 'ERROR';

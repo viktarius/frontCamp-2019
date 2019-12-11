@@ -3,7 +3,7 @@ import {FilmPoster} from "../FilmPoster/FilmPoster";
 
 import './Films.scss';
 import {connect} from "react-redux";
-import sort from "../../reducers/sort";
+import {showError} from "../../actions/actionCreator";
 
 class Films extends Component {
     constructor() {
@@ -21,8 +21,9 @@ class Films extends Component {
             .then(({data}) =>
                 this.setState({films: data.sort((a, b) => a[sortType] < b[sortType] ? 1 : -1)})
             )
-            .catch(e => console.error('fetch error: ', e.message))
+            .catch(e => this.props.showError('fetch error: ', e.message))
             .finally(() => this.setState({isLoad: true}));
+        this.props.showError('fetch error: ');
     };
 
     componentDidMount() {
@@ -60,4 +61,4 @@ class Films extends Component {
 export default connect(state => ({
     sort: state.sort,
     search: state.search
-}))(Films);
+}), {showError})(Films);

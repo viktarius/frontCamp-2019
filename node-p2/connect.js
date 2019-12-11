@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.findOrCreate = function findOrCreate(condition, callback) {
     const self = this;
-    console.log(condition);
     self.findOne(condition, (err, result) => {
         return result ? callback(err, result) : self.create(condition, (err, result) => { return callback(err, result) })
     })

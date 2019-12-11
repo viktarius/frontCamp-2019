@@ -3,7 +3,7 @@ import './App.scss';
 import Films from "../Films/Films";
 import {Footer} from "../Footer/Footer";
 import Sort from "../Sort/Sort";
-import {Header} from "../Header/Header";
+import ErrorHandler from "../ErrorHandler/ErrorHandler";
 
 function App({children}) {
     return (
@@ -12,6 +12,7 @@ function App({children}) {
             <Sort/>
             <Films/>
             <Footer/>
+            <ErrorHandler />
         </div>
     );
 }
