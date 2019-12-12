@@ -1,0 +1,45 @@
+@import '../../constants/colors';
+
+.search {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  &--title{
+    color: $first-text-color;
+    text-transform: uppercase;
+    font-size: 40px;
+    h2{
+      font-weight: 100;
+      margin-bottom: 30px;
+    }
+  }
+  &--text {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+    input {
+      padding: 10px 20px;
+      margin-right: 10px;
+      //width: calc(100% - 125px);
+      width: 100%;
+      background-color: rgba(66, 66, 66, 0.8);
+      border: none;
+      outline: none;
+      font-size: 24px;
+      border-radius: 5px;
+      color: $first-text-color;
+    }
+  }
+  &--type{
+    margin-top: 10px;
+    span{
+      font-weight: 100;
+      color: $first-text-color;
+      font-size: 18px;
+      padding-right: 10px;
+      text-transform: uppercase;
+    }
+  }
+}

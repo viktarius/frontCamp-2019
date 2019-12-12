@@ -1,0 +1,58 @@
+@import "../../constants/colors";
+.filmLink{
+  text-decoration: none;
+  max-width: 30%;
+  padding: 0;
+  margin: 0;
+}
+
+.film {
+  display: flex;
+  flex-direction: column;
+  color: $second-text-color;
+  cursor: pointer;
+  margin: 10px 20px;
+  &--img {
+    margin: 10px 20px;
+    flex: 1;
+    max-height: 650px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+  }
+
+  &--info {
+    display: flex;
+    flex-direction: row;
+    padding: 0 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.info {
+  &--left {
+    width: calc(100% - 80px);
+    text-align: left;
+
+    .title {
+      color: $first-text-color;
+    }
+  }
+
+  &--right {
+    width: 80px;
+    text-align: right;
+
+    .year {
+      padding: 3px 10px;
+      border: 1px solid $second-text-color;
+      border-radius: 3px;
+      text-align: center;
+
+    }
+  }
+}
