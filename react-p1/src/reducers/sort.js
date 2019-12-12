@@ -1,4 +1,4 @@
-import {CHANGE_SORT_TYPE} from "../constants/redux";
+import {CHANGE_SORT_TYPE} from "../constants/REDUX";
 
 const initialState = {
     sortType: 'release_date',

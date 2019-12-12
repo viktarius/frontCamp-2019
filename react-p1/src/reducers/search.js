@@ -1,4 +1,4 @@
-import {CHANGE_SEARCH_VALUE, CHANGE_SEARCH_BY} from "../constants/redux";
+import {CHANGE_SEARCH_VALUE, CHANGE_SEARCH_BY} from "../constants/REDUX";
 
 const initialState = {
     value: '',

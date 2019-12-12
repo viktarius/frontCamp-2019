@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
-import Films from "../Films/Films";
-import {Footer} from "../Footer/Footer";
+import Films from "../Films";
+import Footer from "../Footer";
 import Sort from "../Sort/Sort";
 import ErrorHandler from "../ErrorHandler/ErrorHandler";
 

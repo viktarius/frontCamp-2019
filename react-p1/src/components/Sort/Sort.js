@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button} from "../Button/Button";
 import {connect} from "react-redux";
 import {changeSort} from '../../actions/actionCreator';
+import Button from "../Button";
 
 import './Sort.scss';
 

@@ -1,4 +1,4 @@
-import {CHANGE_SEARCH_VALUE, CHANGE_SEARCH_BY, CHANGE_SORT_TYPE, ERROR} from "../constants/redux";
+import {CHANGE_SEARCH_VALUE, CHANGE_SEARCH_BY, CHANGE_SORT_TYPE, ERROR} from "../constants/REDUX";
 
 export const changeSort = (sortType) => ({
     type: CHANGE_SORT_TYPE,

@@ -1,8 +1,8 @@
 import React from 'react';
-
-import './FilmPoster.scss';
-import './FilmsPosterResponsive.scss';
 import {Link} from "react-router-dom";
+
+import './FilmsPosterResponsive.scss';
+import './FilmPoster.scss';
 
 export const FilmPoster = ({film: {id, title, genres, poster_path, release_date}}) => {
     const year = release_date.split('-')[0];

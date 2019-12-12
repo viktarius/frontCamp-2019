@@ -1,4 +1,4 @@
-import {ERROR} from "../constants/redux";
+import {ERROR} from "../constants/REDUX";
 
 const initialState = {
     errorText: ''

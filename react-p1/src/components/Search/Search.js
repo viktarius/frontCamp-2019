@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button} from "../Button/Button";
 import {connect} from "react-redux";
 import {changeSearchBy, changeSearchValue} from "../../actions/actionCreator";
+import Button from "../Button";
 
 import('./Search.scss');
 

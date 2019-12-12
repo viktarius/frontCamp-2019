@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {FilmPoster} from "../FilmPoster/FilmPoster";
-
-import './Films.scss';
 import {connect} from "react-redux";
 import {showError} from "../../actions/actionCreator";
+import FilmPoster from "../FilmPoster";
+import {URL} from '../../constants/API';
+
+import './Films.scss';
 
 class Films extends Component {
     constructor() {
@@ -16,7 +17,7 @@ class Films extends Component {
 
     fetchData = (query = '') => {
         const {sortType} = this.props.sort;
-        fetch('https://reactjs-cdp.herokuapp.com/movies' + query)
+        fetch(URL + query)
             .then(data => data.json())
             .then(({data}) =>
                 this.setState({films: data.sort((a, b) => a[sortType] < b[sortType] ? 1 : -1)})
