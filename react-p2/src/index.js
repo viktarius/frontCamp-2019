@@ -15,7 +15,8 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route exact path='/' component={Header}/>
-                    <Route path='/movie/:id' component={MainFilm}/>
+                    <Route exact path='/movie/:id' component={MainFilm}/>
+                    <Route path='/:type/:value' component={Header}/>
                 </Switch>
             </App>
         </BrowserRouter>

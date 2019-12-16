@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {showError} from "../../actions/actionCreator";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { showError } from "../../actions/actionCreator";
 import FilmPoster from "../FilmPoster";
-import {URL} from '../../constants/API';
+import { URL } from '../../constants/API';
 
 import './Films.scss';
 
@@ -16,40 +16,38 @@ class Films extends Component {
     }
 
     fetchData = (query = '') => {
-        const {sortType} = this.props.sort;
+        const { sortType } = this.props.sort;
         fetch(URL + '/movies' + query)
             .then(data => data.json())
-            .then(({data}) =>
-                this.setState({films: data.sort((a, b) => a[sortType] < b[sortType] ? 1 : -1)})
+            .then(({ data }) =>
+                this.setState({ films: data.sort((a, b) => a[sortType] < b[sortType] ? 1 : -1) })
             )
             .catch(e => this.props.showError('fetch error: ', e.message))
-            .finally(() => this.setState({isLoad: true}));
+            .finally(() => this.setState({ isLoad: true }));
     };
 
     componentDidMount() {
-        const searchValue = this.props.search.value;
-        const searchBy = this.props.search.searchBy;
-        const query = (searchValue.trim() !== '') ? `search=${searchValue}&searchBy=${searchBy}` : '';
+        const searchURL = this.props.search.searchURL;
+        const query = (searchURL.trim() !== '') ? `${searchURL}` : '';
         this.fetchData(query);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const oldSortType = prevProps.sort.sortType;
-        const oldSearchValue = prevProps.search.value;
-        const oldSearchBy = prevProps.search.searchBy;
         const newSortType = this.props.sort.sortType;
-        const newSearchValue = this.props.search.value;
-        const newSearchBy = this.props.search.searchBy;
+        const oldSortType = prevProps.sort.sortType;
+        const newSearchURL = this.props.search.searchURL;
+        const oldSearchURL = prevProps.search.searchURL;
         if (oldSortType !== newSortType) {
-            this.setState({films: this.state.films.sort((a, b) => a[newSortType] < b[newSortType] ? 1 : -1)})
+            this.setState({ films: this.state.films.sort((a, b) => a[newSortType] < b[newSortType] ? 1 : -1) })
         }
-        if (oldSearchValue !== newSearchValue || oldSearchBy !== newSearchBy) {
-            this.fetchData(`?search=${newSearchValue}&searchBy=${newSearchBy}`);
+        if (newSearchURL !== oldSearchURL) {
+            this.fetchData(`${newSearchURL}`);
         }
+
     }
 
     render() {
-        const {films, isLoad} = this.state;
+        const { films, isLoad } = this.state;
         return (
             <div className="films">
                 {films.map(film => <FilmPoster key={film.id} film={film}/>)}
@@ -61,4 +59,4 @@ class Films extends Component {
 export default connect(state => ({
     sort: state.sort,
     search: state.search
-}), {showError})(Films);
+}), { showError })(Films);

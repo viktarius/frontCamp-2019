@@ -4,11 +4,13 @@ import Search from "../Search";
 
 import './Header.scss';
 
-export const Header = () => {
+export const Header = (props) => {
+    const type = props.match.params.type || '';
+    const value = props.match.params.value || '';
     return (
         <header>
-            <Logo />
-            <Search />
+            <Logo/>
+            <Search value={value} searchBy={type}/>
         </header>
     )
 };

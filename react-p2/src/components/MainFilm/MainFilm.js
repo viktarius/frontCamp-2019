@@ -14,7 +14,7 @@ class MainFilm extends React.Component {
     }
 
     fetchData = (id) => {
-        fetch(URL + id)
+        fetch(URL + '/movies/' + id)
             .then(data => data.json())
             .then(film => this.setState({film}))
             .finally(() => this.setState({isLoad: true}));
