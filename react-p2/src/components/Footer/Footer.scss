@@ -1,0 +1,9 @@
+@import '../../constants/colors';
+
+footer{
+  color: $second-color;
+  text-align: center;
+  background-color: $first-color;
+  font-size: 24px;
+  padding: 20px 0;
+}

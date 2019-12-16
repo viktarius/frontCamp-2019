@@ -1,0 +1,18 @@
+@import '../../constants/colors';
+
+.error{
+  position: fixed;
+  display: none;
+  min-width: 200px;
+  min-height: 100px;
+  right: 10px;
+  bottom: 10px;
+  background-color: $main-color;
+  color: $second-color;
+}
+
+.active-error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
