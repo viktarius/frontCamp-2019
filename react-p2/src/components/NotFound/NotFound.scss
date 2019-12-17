@@ -1,0 +1,12 @@
+@import  '../../constants/colors';
+
+.not-found {
+  background-color: $main-color;
+  display: flex;
+  min-height: 100vh;
+  &--message {
+    margin: auto;
+    color: $first-text-color;
+    font-size: 48px;
+  }
+}

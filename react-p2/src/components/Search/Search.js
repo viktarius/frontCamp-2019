@@ -1,44 +1,37 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { changeSearchValue, changeSearchBy } from "../../actions/actionCreator";
+import {connect} from "react-redux";
+import {changeSearchValue, changeSearchBy, setSearch} from "../../actions/actionCreator";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import('./Search.scss');
 
 class Search extends React.Component {
-    constructor({ searchBy, value }) {
+    constructor() {
         super();
         this.state = {
-            value: value,
-            searchBy: searchBy
+            value: '',
+            searchBy: 'title'
         }
     }
 
     handleButtonClick = (searchBy) => {
         this.props.changeSearchBy(searchBy);
-        this.setState({ searchBy })
+        this.setState({searchBy})
     };
 
-    handleInputChange = ({ target }) => {
+    handleInputChange = ({target}) => {
         this.setState({
             value: target.value
         })
     };
 
-    componentDidMount() {
-        // this.props.changeSearchURL(this.getSearchUrl(this.props))
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // if (this.getSearchUrl(prevProps) !== this.getSearchUrl(this.props)) {
-        //     this.setState({value: this.props.value});
-        //     this.props.changeSearchURL(this.getSearchUrl(this.props))
-        // }
-    }
+    handleSubmitClick = () => {
+        this.props.setSearch(this.state.value, this.state.searchBy);
+    };
 
     render() {
-        const { searchBy, value } = this.props.search;
+        const {searchBy, value} = this.props.search;
         const isActive = (searchBy === 'title') ? true : false;
         const componentPath = this.getComponentPath(this.state);
         return (
@@ -48,10 +41,10 @@ class Search extends React.Component {
                 </div>
 
                 <div className="search--text">
-                    <input type="text" name="search" placeholder="Search" value={value}
+                    <input type="text" name="search" placeholder="Search" defaultValue={value}
                            onChange={this.handleInputChange}/>
                     <Link to={componentPath}>
-                        <Button type="main" isActive={true} text="Search"/>
+                        <Button type="main" isActive={true} text="Search" handleClick={this.handleSubmitClick}/>
                     </Link>
                 </div>
                 <div className="search--type">
@@ -65,11 +58,11 @@ class Search extends React.Component {
         )
     }
 
-    getSearchUrl({ searchBy, value }) {
+    getSearchUrl({searchBy, value}) {
         return `?search=${value}&searchBy=${searchBy}`;
     }
 
-    getComponentPath({ searchBy, value }) {
+    getComponentPath({searchBy, value}) {
         return `/${searchBy}/${value}`;
     }
 
@@ -79,4 +72,4 @@ const mapStateToProps = state => ({
     search: state.search
 });
 
-export default connect(mapStateToProps, { changeSearchValue, changeSearchBy })(Search);
+export default connect(mapStateToProps, {changeSearchValue, changeSearchBy, setSearch})(Search);

@@ -4,7 +4,9 @@ import './NotFound.scss';
 
 const NotFound = () => {
     return (
-        <div>Not found</div>
+        <div className="not-found">
+            <div className="not-found--message">Not found</div>
+        </div>
     )
 };
 

@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App/App';
 import {Provider} from "react-redux";
 import store from "./store";
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Header from "./components/Header";
-import MainFilm from "./components/MainFilm";
-import MainLayout from "./components/Layout";
+import {MainLayout, FilmLayout} from "./components/Layout";
+import NotFound from "./components/NotFound";
 
 import './index.css';
 
@@ -15,8 +13,9 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path='/' component={MainLayout}/>
-                <Route exact path='/movie/:id' component={MainFilm}/>
+                <Route exact path='/movie/:id' component={FilmLayout}/>
                 <Route path='/:type/:value' component={MainLayout}/>
+                <Route path='**' component={NotFound}/>
             </Switch>
         </BrowserRouter>
     </Provider>,
