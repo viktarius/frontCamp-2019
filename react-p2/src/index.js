@@ -6,19 +6,18 @@ import store from "./store";
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Header from "./components/Header";
 import MainFilm from "./components/MainFilm";
+import MainLayout from "./components/Layout";
 
 import './index.css';
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App>
-                <Switch>
-                    <Route exact path='/' component={Header}/>
-                    <Route exact path='/movie/:id' component={MainFilm}/>
-                    <Route path='/:type/:value' component={Header}/>
-                </Switch>
-            </App>
+            <Switch>
+                <Route exact path='/' component={MainLayout}/>
+                <Route exact path='/movie/:id' component={MainFilm}/>
+                <Route path='/:type/:value' component={MainLayout}/>
+            </Switch>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root'));

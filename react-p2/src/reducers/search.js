@@ -1,14 +1,26 @@
-import {CHANGE_SEARCH_URL} from "../constants/REDUX";
+import {CHANGE_SEARCH_VALUE, CHANGE_SEARCH_BY, SET_SEARCH} from "../constants/REDUX";
 
 const initialState = {
-    searchURL: ''
+    value: '',
+    searchBy: 'title'
 };
 
-const search = (state = initialState, {type, searchURL}) => {
+const search = (state = initialState, {type, value, searchBy}) => {
     switch (type) {
-        case CHANGE_SEARCH_URL:
+        case SET_SEARCH:
             return {
-                searchURL
+                value,
+                searchBy
+            };
+        case CHANGE_SEARCH_VALUE:
+            return {
+                ...state,
+                value
+            };
+        case CHANGE_SEARCH_BY:
+            return {
+                ...state,
+                searchBy
             };
         default:
             return  state;

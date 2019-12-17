@@ -27,21 +27,22 @@ class Films extends Component {
     };
 
     componentDidMount() {
-        const searchURL = this.props.search.searchURL;
-        const query = (searchURL.trim() !== '') ? `${searchURL}` : '';
+        const {value, searchBy} = this.props.search;
+        console.log(this.props);
+        const query = (value.trim() !== '') ? `?search=${value}&searchBy=${searchBy}` : '';
         this.fetchData(query);
     }
 
     componentDidUpdate(prevProps, prevState) {
         const newSortType = this.props.sort.sortType;
         const oldSortType = prevProps.sort.sortType;
-        const newSearchURL = this.props.search.searchURL;
-        const oldSearchURL = prevProps.search.searchURL;
+        const {value: newValue, searchBy: newSearchBy} = this.props.search;
+        const {value: oldValue, searchBy: oldSearchBy} = prevProps.search;
         if (oldSortType !== newSortType) {
             this.setState({ films: this.state.films.sort((a, b) => a[newSortType] < b[newSortType] ? 1 : -1) })
         }
-        if (newSearchURL !== oldSearchURL) {
-            this.fetchData(`${newSearchURL}`);
+        if (newValue !== oldValue || newSearchBy !== oldSearchBy ) {
+            this.fetchData(`?search=${newValue}&searchBy=${newSearchBy}`);
         }
 
     }

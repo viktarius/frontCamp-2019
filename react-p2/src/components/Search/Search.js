@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { changeSearchURL } from "../../actions/actionCreator";
+import { changeSearchValue, changeSearchBy } from "../../actions/actionCreator";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 
@@ -16,6 +16,7 @@ class Search extends React.Component {
     }
 
     handleButtonClick = (searchBy) => {
+        this.props.changeSearchBy(searchBy);
         this.setState({ searchBy })
     };
 
@@ -26,19 +27,18 @@ class Search extends React.Component {
     };
 
     componentDidMount() {
-        this.props.changeSearchURL(this.getSearchUrl(this.props))
+        // this.props.changeSearchURL(this.getSearchUrl(this.props))
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.getSearchUrl(prevProps) !== this.getSearchUrl(this.props)) {
-            this.setState({value: this.props.value});
-            this.props.changeSearchURL(this.getSearchUrl(this.props))
-        }
+        // if (this.getSearchUrl(prevProps) !== this.getSearchUrl(this.props)) {
+        //     this.setState({value: this.props.value});
+        //     this.props.changeSearchURL(this.getSearchUrl(this.props))
+        // }
     }
 
     render() {
-        console.log(this.props);
-        const { searchBy, value } = this.state;
+        const { searchBy, value } = this.props.search;
         const isActive = (searchBy === 'title') ? true : false;
         const componentPath = this.getComponentPath(this.state);
         return (
@@ -75,9 +75,8 @@ class Search extends React.Component {
 
 }
 
-// export default Search;
-
-export default connect(state => ({
+const mapStateToProps = state => ({
     search: state.search
-}), { changeSearchURL })(Search);
+});
 
+export default connect(mapStateToProps, { changeSearchValue, changeSearchBy })(Search);
