@@ -1,0 +1,10 @@
+@import '../../constants/colors';
+
+.films{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: $main-color;
+  padding: 40px 0;
+}
