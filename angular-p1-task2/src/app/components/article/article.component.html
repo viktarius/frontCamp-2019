@@ -1,20 +1,20 @@
 <div class="article">
   <div class="article--img">
     <img
-      src="https://images.befunky.com/wp/wp-2014-08-milky-way-1023340_1280.jpg?auto=format&fm=jpg&q=75&w=1184&ixlib=js-1.4.1"
+      src="{{article.urlToImage}}"
       alt="test">
   </div>
   <div class="article--content">
     <div class="left">
-      <h3>title</h3>
-      <p>content<br>content<br>content<br>content<br>content<br>content<br>content<br>content</p>
+      <h3>{{article.title}}</h3>
+      <p>{{article.content}}</p>
       <a routerLink="/notwhere" routerLinkActive="active">read more</a>
     </div>
     <div class="right">
-      <p>Date: date</p>
+      <p>Date: {{article.publishedAt | date:'short'}}</p>
     </div>
   </div>
-  <div class="article--control" *ngIf="true">
+  <div class="article--control" *ngIf="article.ownArticle">
     <button>Edit</button>
     <button>Delete</button>
   </div>

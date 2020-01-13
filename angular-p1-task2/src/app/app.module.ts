@@ -10,6 +10,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { AddComponent } from './components/add/add.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AddComponent } from './components/add/add.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

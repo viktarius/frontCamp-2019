@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SettingsService} from '../../helpers/settings.service'
+import { Component, OnInit } from '@angular/core';
+import { SettingsService } from '../../helpers/settings.service'
+import { RequestService } from "../../helpers/request.service";
 
 @Component({
   selector: 'app-settings',
@@ -7,25 +8,26 @@ import {SettingsService} from '../../helpers/settings.service'
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  constructor(private settingsService: SettingsService) {
+  sources;
+
+  constructor(private settingsService: SettingsService,
+              private requestService: RequestService) {
   }
 
   ngOnInit() {
+    this.requestService.getAllSources().subscribe(response => this.sources = response.sources )
   }
 
   changeSource(event) {
-    if(!this.settingsService.onlyMine){
-      this.settingsService.sourceName = event.target.value;
+    if (!this.settingsService.onlyMine) {
+      this.settingsService.sourceName = event.target.options[event.target.options.selectedIndex].text;
+      this.settingsService.changeSourceId(event.target.value);
     }
   }
 
   toggleCheckbox() {
     this.settingsService.onlyMine = !this.settingsService.onlyMine;
     this.settingsService.sourceName = 'My articles';
-  }
-
-  addArticle() {
-    console.log('add')
   }
 
 }

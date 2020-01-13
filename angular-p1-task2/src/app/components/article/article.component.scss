@@ -31,6 +31,7 @@
     justify-content: space-between;
     padding: 10px 20px;
     .left{
+      width: 50%;
       h3{
         font-weight: 400;
         font-size: 24px;
@@ -40,6 +41,10 @@
         color: #6c6c6c;
         cursor: pointer;
       }
+    }
+    .right{
+      width: 50%;
+      text-align: right;
     }
   }
 }

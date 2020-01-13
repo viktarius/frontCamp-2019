@@ -2,8 +2,7 @@
   <div class="setting-group--select">
     <select name="" id="" (change)="changeSource($event)">
       <option value="0" disabled selected>Select Source</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
+      <option value="{{source.id}}" *ngFor="let source of sources">{{source.name}}</option>
     </select>
   </div>
 
