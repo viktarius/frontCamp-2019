@@ -15,18 +15,18 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestService.getAllSources().subscribe(response => this.sources = response.sources )
+    this.requestService.getAllSources().subscribe((res: ISourceResponse) => this.sources = res.sources )
   }
 
   changeSource(event) {
-    if (!this.settingsService.onlyMine) {
+    if (!this.settingsService.localArticles) {
       this.settingsService.sourceName = event.target.options[event.target.options.selectedIndex].text;
       this.settingsService.changeSourceId(event.target.value);
     }
   }
 
   toggleCheckbox() {
-    this.settingsService.onlyMine = !this.settingsService.onlyMine;
+    this.settingsService.toggleArticles(!this.settingsService.localArticles);
     this.settingsService.sourceName = 'My articles';
   }
 

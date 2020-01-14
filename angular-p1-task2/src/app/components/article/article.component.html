@@ -1,4 +1,4 @@
-<div class="article">
+<div class="article" (click)="openArticle()">
   <div class="article--img">
     <img
       src="{{article.urlToImage}}"
@@ -14,7 +14,7 @@
       <p>Date: {{article.publishedAt | date:'short'}}</p>
     </div>
   </div>
-  <div class="article--control" *ngIf="article.ownArticle">
+  <div class="article--control" *ngIf="article.localArticle">
     <button>Edit</button>
     <button>Delete</button>
   </div>

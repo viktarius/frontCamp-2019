@@ -11,6 +11,8 @@ import { ArticleComponent } from './components/article/article.component';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { AddComponent } from './components/add/add.component';
 import {HttpClientModule} from "@angular/common/http";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ShowComponent } from './components/show/show.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import {HttpClientModule} from "@angular/common/http";
     SettingsComponent,
     ArticleComponent,
     ArticlesComponent,
-    AddComponent
+    AddComponent,
+    ShowComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

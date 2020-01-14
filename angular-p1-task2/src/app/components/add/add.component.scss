@@ -1,0 +1,60 @@
+.form-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 40px;
+
+    input, textarea {
+      padding: 4px;
+      border: 1px solid;
+      border-radius: 8px;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    input[type=radio]{
+      width: 20px;
+    }
+    .form-control {
+      display: flex;
+      justify-content: space-between;
+      input[type=button],
+      input[type=submit] {
+        width: 140px;
+        border: 1px solid black;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 24px;
+        background-color: #b2b2b2;
+      }
+    }
+
+    #fake-img{
+      width: 300px;
+    }
+
+    label {
+      font-size: 18px;
+    }
+
+    .left,
+    .right {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .left {
+      padding: 20px 20px 20px 40px;
+      border-left: 1px solid black;
+    }
+
+    .right {
+      padding: 20px 40px 20px 20px;
+      border-right: 1px solid black;
+    }
+  }
+}

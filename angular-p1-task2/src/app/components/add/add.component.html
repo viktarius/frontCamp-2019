@@ -1,1 +1,40 @@
-<p>add works!</p>
+<div class="form-wrapper">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="left">
+      <label for="title">Title</label>
+      <input id="title" type="text" formControlName="title"/>
+      <label for="short">Sort Description</label>
+      <input type="text" id="short" formControlName="shortDescription">
+      <label for="content">content</label>
+      <textarea id="content" type="text" formControlName="content"></textarea>
+    </div>
+
+    <div class="right">
+      <label for="img">Img
+        <span class="img-type">
+          <input type="radio" name="img-type" id="url-radio" (click)="toggleType(true)" [checked]="imgType">
+          <label for="url-radio">URL</label>
+          <input type="radio" name="img-type" id="img-radio" (click)="toggleType(false)" [checked]="!imgType">
+          <label for="img-radio">IMG</label>
+        </span>
+      </label>
+      <input id="img" type="text" formControlName="urlToImage" *ngIf="imgType"/>
+      <img id="fake-img" src="/assets/img.jpg" alt="" *ngIf="!imgType">
+      <label for="date">Date</label>
+      <input id="date" type="text" formControlName="date"/>
+
+      <label for="author">Author</label>
+      <input id="author" type="text" formControlName="author"/>
+
+      <label for="source">Source URL</label>
+      <input id="source" type="text" formControlName="source"/>
+
+      <div class="form-control">
+        <input type="submit" value="Save">
+        <input type="button" (click)="cancel()" value="Cancel">
+      </div>
+    </div>
+
+  </form>
+</div>
+

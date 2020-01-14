@@ -5,7 +5,8 @@ import { Subject } from "rxjs";
   providedIn: 'root'
 })
 export class SettingsService {
-  onlyMine: boolean = false;
+  localArticles: boolean = false;
+  localArticlesChange: Subject<boolean> = new Subject<boolean>();
   sourceName: String = 'My articles';
   sourceId: String = '';
   sourceIdChange: Subject<String> = new Subject<String>();
@@ -14,7 +15,12 @@ export class SettingsService {
   constructor() {
   }
 
-  changeSourceId(sourceId){
+  toggleArticles(type: boolean): void{
+    this.localArticles = type;
+    this.localArticlesChange.next(this.localArticles);
+  }
+
+  changeSourceId(sourceId: string) : void{
     this.sourceId = sourceId;
     this.sourceIdChange.next(this.sourceId);
   }
