@@ -8,8 +8,7 @@ import { ContactComponent } from "./components/contact/contact.component";
 const routes: Routes = [
   {path: '', component: MainComponent},
   {path: 'contact', component: ContactComponent},
-  {path: '404', component: NotFoundComponent},
-  {path: '**', redirectTo: '/404'}
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
