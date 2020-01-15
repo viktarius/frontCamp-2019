@@ -4,6 +4,7 @@ import { Subject } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+
 export class SettingsService {
   localArticles: boolean = false;
   localArticlesChange: Subject<boolean> = new Subject<boolean>();
@@ -11,9 +12,6 @@ export class SettingsService {
   sourceId: String = '';
   sourceIdChange: Subject<String> = new Subject<String>();
   page: number = 1;
-
-  constructor() {
-  }
 
   toggleArticles(type: boolean): void{
     this.localArticles = type;

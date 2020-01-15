@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from "@angular/forms";
 import { LocalArticleService } from "../../helpers/local-article.service";
 import { Router } from "@angular/router";
@@ -8,7 +8,7 @@ import { Router } from "@angular/router";
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent implements OnInit {
+export class AddComponent {
   article;
   imgType: boolean = true;
 
@@ -26,8 +26,6 @@ export class AddComponent implements OnInit {
               private localArticleService: LocalArticleService) {
   }
 
-  ngOnInit() {
-  }
 
   onSubmit() {
     this.article = this.form.value;
