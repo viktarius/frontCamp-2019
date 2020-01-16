@@ -1,0 +1,48 @@
+.setting-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px 0;
+  font-size: 18px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+
+  &--select{
+    select{
+      padding: 3px 10px;
+      border: 1px solid black;
+      border-radius: 8px;
+      margin-right: 10px;
+      outline: none;
+    }
+  }
+  &--filter{
+    input{
+      outline: none;
+      margin-right: 10px;
+    }
+    button{
+      border: 1px solid black;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #b2b2b2;
+    }
+  }
+  &--checkbox{
+    display: flex;
+    align-items: center;
+  }
+  &--add{
+    a{
+      border: 1px solid black;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #b2b2b2;
+      text-decoration: none;
+      color: black;
+    }
+  }
+}

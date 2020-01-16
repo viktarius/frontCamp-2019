@@ -1,0 +1,21 @@
+<div class="article" (click)="openArticle()">
+  <div class="article--img">
+    <img
+      src="{{article.urlToImage}}"
+      alt="test">
+  </div>
+  <div class="article--content">
+    <div class="left">
+      <h3>{{article.title}}</h3>
+      <p>{{article.content}}</p>
+      <a routerLink="/notwhere" routerLinkActive="active">read more</a>
+    </div>
+    <div class="right">
+      <p>Date: {{article.publishedAt | date:'short'}}</p>
+    </div>
+  </div>
+  <div class="article--control" *ngIf="article.localArticle">
+    <button>Edit</button>
+    <button>Delete</button>
+  </div>
+</div>
