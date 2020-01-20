@@ -61,6 +61,22 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "aot": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "aot": false
             }
           }
         },
@@ -72,6 +88,10 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-p1-task2:build:production"
+            },
+            "aot": {
+              "browserTarget": "angular-p1-task2:build:production",
+              "aot": true
             }
           }
         },

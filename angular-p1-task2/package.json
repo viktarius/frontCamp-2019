@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "serve:aot": "ng serve --configuration=aot",
+    "build:aot": "ng build --configuration=aot"
   },
   "private": true,
   "dependencies": {
