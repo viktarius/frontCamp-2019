@@ -9,7 +9,7 @@ import { LocalArticleService } from "../../helpers/local-article.service";
   styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit {
-  articles;
+  articles: Array<Article>;
 
   constructor(private requestService: RequestService,
               private settingsService: SettingsService,

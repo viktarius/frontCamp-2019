@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-  @Input('article') article;
+  @Input('article') article: Article;
 
   constructor(private router: Router) {
   }
