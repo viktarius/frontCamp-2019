@@ -13,6 +13,7 @@ import { AddComponent } from './components/add/add.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ShowComponent } from './components/show/show.component';
+import { ButtonComponent } from './components/core/button/button.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ShowComponent } from './components/show/show.component';
     ArticleComponent,
     ArticlesComponent,
     AddComponent,
-    ShowComponent
+    ShowComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

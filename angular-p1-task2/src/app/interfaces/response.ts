@@ -1,5 +1,5 @@
 interface IArticleResponse {
-  articles: Array<any>,
+  articles: Array<Article>,
   status: string,
   totalResults: number
 }

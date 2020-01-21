@@ -8,7 +8,7 @@
 
   <div class="setting-group--filter">
     <input type="text" placeholder="Type your text...">
-    <button>Filter</button>
+    <app-button label="Filter" (onClick)="filterArticle()"></app-button>
   </div>
 
   <div class="setting-group--checkbox">
@@ -19,6 +19,6 @@
   </div>
 
   <div class="setting-group--add">
-    <a routerLink="/add" routerLinkActive="true">Add Article</a>
+    <a routerLink="/create" routerLinkActive="true">Add Article</a>
   </div>
 </div>

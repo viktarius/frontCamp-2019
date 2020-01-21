@@ -6,8 +6,8 @@ import { ShowComponent } from "./components/show/show.component";
 
 const routes: Routes = [
   {path: '', component: ArticlesComponent},
-  {path: 'add', component: AddComponent},
-  {path: 'edit', component: AddComponent},
+  {path: 'create', component: AddComponent},
+  {path: 'edit/:id', component: AddComponent},
   {path: 'show/:id', component: ShowComponent}
 ];
 

@@ -32,7 +32,8 @@ export class AddComponent {
     this.article.id = +new Date();
     this.article.publishedAt = new Date();
     this.article.localArticle = true;
-    this.localArticleService.addArticle(this.article);
+    console.log(`article was save: ${this.article}`);
+    // this.localArticleService.addArticle(this.article);
     this.router.navigate(['/']);
   }
 
