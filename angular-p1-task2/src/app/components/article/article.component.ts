@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from "@angular/router";
 
 @Component({
@@ -6,14 +6,10 @@ import { Router } from "@angular/router";
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent {
   @Input('article') article: Article;
 
   constructor(private router: Router) {
-  }
-
-  ngOnInit() {
-    console.log(this.article);
   }
 
   openArticle() {

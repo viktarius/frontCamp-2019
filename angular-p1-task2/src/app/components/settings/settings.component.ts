@@ -30,4 +30,8 @@ export class SettingsComponent implements OnInit {
     this.settingsService.sourceName = 'My articles';
   }
 
+  filterArticle(){
+    console.log('articles was filtered');
+  }
+
 }
