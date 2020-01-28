@@ -2,11 +2,17 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="left">
       <label for="title">Title</label>
-      <input id="title" type="text" formControlName="title"/>
-      <label for="short">Sort Description</label>
-      <input type="text" id="short" formControlName="shortDescription">
+      <input
+        [ngClass]="{'danger' : title.invalid && (title.dirty || title.touched)}"
+        id="title" type="text" formControlName="title"/>
+      <label for="short">Description</label>
+      <input
+        [ngClass]="{'danger' : shortDescription.invalid && (shortDescription.dirty || shortDescription.touched)}"
+        type="text" id="short" formControlName="description">
       <label for="content">content</label>
-      <textarea id="content" type="text" formControlName="content"></textarea>
+      <textarea
+        [ngClass]="{'danger' : content.invalid && (content.dirty || content.touched)}"
+        id="content" type="text" formControlName="content"></textarea>
     </div>
 
     <div class="right">
@@ -21,7 +27,7 @@
       <input id="img" type="text" formControlName="urlToImage" *ngIf="imgType"/>
       <img id="fake-img" src="/assets/img.jpg" alt="" *ngIf="!imgType">
       <label for="date">Date</label>
-      <input id="date" type="text" formControlName="date"/>
+      <input id="date" type="text" formControlName="publishedAt"/>
 
       <label for="author">Author</label>
       <input id="author" type="text" formControlName="author"/>
@@ -30,7 +36,7 @@
       <input id="source" type="text" formControlName="source"/>
 
       <div class="form-control">
-        <input type="submit" value="Save">
+        <input type="submit" [disabled]="form.invalid" value="Save">
         <input type="button" (click)="cancel()" value="Cancel">
       </div>
     </div>

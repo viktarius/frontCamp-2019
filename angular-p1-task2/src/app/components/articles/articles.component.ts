@@ -17,7 +17,6 @@ export class ArticlesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('init');
     this.settingsService.sourceIdChange.subscribe((value) => {
       this.requestService.getSourceArticles().subscribe((res: IArticleResponse) => this.articles = res.articles);
     });

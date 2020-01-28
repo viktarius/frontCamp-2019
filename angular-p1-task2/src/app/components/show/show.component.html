@@ -1,22 +1,12 @@
 <div class="article">
   <div class="article--img">
-    <img src="https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg" alt="">
+    <img src="{{article.urlToImage}}" alt="">
   </div>
   <div class="article--content">
-    <h3>Article title</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At autem, ea, enim expedita illo laboriosam maxime
-      molestiae mollitia nam quibusdam quisquam repudiandae? Aut, commodi corporis deserunt distinctio incidunt maxime
-      necessitatibus recusandae reiciendis ut vero! Cum doloremque expedita iusto molestiae, nobis sequi tempora
-      veritatis voluptas. Commodi iusto nemo neque numquam provident quidem tempore! Consectetur porro saepe soluta
-      veritatis? A accusantium, cum cupiditate distinctio dolorum eos esse exercitationem facilis fuga magnam odit saepe
-      temporibus, ullam veniam voluptate? Ab accusantium animi assumenda blanditiis commodi corporis cupiditate dicta
-      dignissimos doloremque dolorum esse excepturi exercitationem harum in inventore ipsa ipsam laboriosam laudantium
-      libero magnam, modi non odit perferendis quae quas, quod reiciendis sapiente sequi sit tempora, unde vel voluptas
-      voluptates! Ad amet asperiores commodi dolores eos, et ex exercitationem facilis fuga illum incidunt itaque
-      laudantium libero mollitia natus necessitatibus, nemo neque nisi non nostrum placeat quaerat quasi rem vel velit,
-      voluptas voluptatem. Ducimus, impedit veniam!</p>
-    <p>Date: date</p>
-    <p>Author</p>
+    <h3>{{article.title}}</h3>
+    <p>{{article.content}}</p>
+    <p>Date: {{article.publishedAt | date:'short'}}</p>
+    <p>{{article.author}}</p>
   </div>
   <div class="article--control">
     <button>Edit</button>
