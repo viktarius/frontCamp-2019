@@ -39,7 +39,11 @@ import { MainComponent } from './components/main/main.component';
     ReactiveFormsModule
   ],
   providers: [],
-  entryComponents: [ArticleComponent],
+  entryComponents: [
+    ArticleComponent,
+    FooterComponent
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
