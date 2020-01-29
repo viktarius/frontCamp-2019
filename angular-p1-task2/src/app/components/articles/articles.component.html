@@ -1,4 +1,4 @@
-<div class="articles" *ngIf="articles">
-  <app-article *ngFor="let article of articles" [article]="article"></app-article>
-  <app-button label="Load More" class="big-button" (onClick)="loadMore()"></app-button>
+<div class="articles" >
+  <ng-template ad-host></ng-template>
+  <app-button label="Load More" class="big-button" (onClick)="loadArticles()"></app-button>
 </div>

@@ -7,8 +7,9 @@ import { LocalArticleService } from "../../helpers/local-article.service";
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss']
 })
-export class ArticleComponent {
-  @Input('article') article: Article;
+
+export class ArticleComponent implements AdComponent{
+  @Input() article: Article;
 
   constructor(private router: Router,
               private localArticleService: LocalArticleService) {
@@ -33,4 +34,8 @@ export class ArticleComponent {
     }
   }
 
+}
+
+interface AdComponent {
+  article: Article;
 }
