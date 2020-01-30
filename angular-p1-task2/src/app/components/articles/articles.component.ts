@@ -1,45 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { RequestService } from "../../helpers/request.service";
-import { SettingsService } from "../../helpers/settings.service";
-import { LocalArticleService } from "../../helpers/local-article.service";
+import {
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  EventEmitter, Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { AdDirective } from "../../ad.directive";
+import { ArticleComponent } from "../article/article.component";
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent implements OnInit {
-  articles: Array<Article>;
 
-  constructor(private requestService: RequestService,
-              private settingsService: SettingsService,
-              private localArticleService: LocalArticleService) {
+export class ArticlesComponent implements OnInit {
+  @Input() articles;
+  @Output() loadMore = new EventEmitter();
+
+  @ViewChild(AdDirective, {static: true}) adArticles: AdDirective;
+
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
-    console.log('init');
-    this.settingsService.sourceIdChange.subscribe((value) => {
-      this.requestService.getSourceArticles().subscribe((res: IArticleResponse) => this.articles = res.articles);
-    });
-    this.settingsService.localArticlesChange.subscribe((value) => {
-      if (value) {
-        this.articles = this.localArticleService.articles;
-      } else {
-        this.requestService.getAllArticles().subscribe((res: IArticleResponse) => this.articles = res.articles);
-      }
-    });
-    this.requestService.getAllArticles().subscribe((res: IArticleResponse) => this.articles = res.articles);
+    this.renderArticles();
   }
 
-  loadMore() {
-    this.settingsService.page++;
-    if (this.settingsService.sourceName === 'My articles' && !this.settingsService.localArticles) {
-      this.requestService.getAllArticles().subscribe((res: IArticleResponse) => this.articles = [...this.articles, ...res.articles]);
-    } else if (!this.settingsService.localArticles) {
-      this.requestService.getSourceArticles().subscribe((res: IArticleResponse) => this.articles = [...this.articles, ...res.articles]);
-    } else {
-      this.articles = this.localArticleService.articles;
-    }
+  loadArticles() {
+    this.loadMore.emit();
+  }
+
+  renderArticles() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ArticleComponent);
+    const viewContainerRef = this.adArticles.viewContainerRef;
+    this.articles.map(art => {
+      const componentRef = viewContainerRef.createComponent(componentFactory);
+      (<ArticleComponent>componentRef.instance).article = art;
+    })
   }
 
 }

@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="article--control" *ngIf="article.localArticle">
-    <button>Edit</button>
-    <button>Delete</button>
+    <button (click)="editArticle()">Edit</button>
+    <button (click)="deleteArticle($event)">Delete</button>
   </div>
 </div>

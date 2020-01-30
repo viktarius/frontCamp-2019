@@ -6,9 +6,20 @@ import { Articles } from './data';
 })
 
 export class LocalArticleService {
-  articles: Array<Article> = Articles;
+  articles: Article[] = Articles;
 
   addArticle(article) {
     this.articles.push(article)
+  }
+
+  updateArticle(article, id) {
+    const [oldArticle] = this.articles.filter(art => art.id === id);
+    const index = this.articles.indexOf(oldArticle);
+    this.articles[index] = article;
+  }
+
+  deleteArticle(id){
+    const [deleteArticle] = this.articles.filter(art => art.id === id);
+    this.articles.splice(this.articles.indexOf(deleteArticle), 1);
   }
 }

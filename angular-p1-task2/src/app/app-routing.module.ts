@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ArticlesComponent} from "./components/articles/articles.component";
 import {AddComponent} from "./components/add/add.component";
 import { ShowComponent } from "./components/show/show.component";
+import { MainComponent } from "./components/main/main.component";
 
 const routes: Routes = [
-  {path: '', component: ArticlesComponent},
+  {path: '', component: MainComponent},
   {path: 'create', component: AddComponent},
   {path: 'edit/:id', component: AddComponent},
   {path: 'show/:id', component: ShowComponent}
