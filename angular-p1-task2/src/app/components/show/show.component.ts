@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalArticleService } from "../../helpers/local-article.service";
 import { ActivatedRoute } from "@angular/router";
+
+import { Article } from '../../interfaces/data';
+import { LocalArticleService } from "../../helpers/local-article.service";
 
 @Component({
   selector: 'app-show',

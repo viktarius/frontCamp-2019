@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+
+import { Article } from '../interfaces/data';
 import { Articles } from './data';
 
 @Injectable({

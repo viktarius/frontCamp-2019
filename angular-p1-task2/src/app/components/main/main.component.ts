@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Article } from '../../interfaces/data';
+import { IArticleResponse } from '../../interfaces/response';
 import { RequestService } from "../../helpers/request.service";
 import { SettingsService } from "../../helpers/settings.service";
 import { LocalArticleService } from "../../helpers/local-article.service";
