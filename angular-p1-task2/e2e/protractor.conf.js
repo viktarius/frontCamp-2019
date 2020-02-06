@@ -1,7 +1,6 @@
 // @ts-check
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
-// const agent = require('../protractor/reportportalConf');
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 const ReportportalAgent = require('agent-js-jasmine');

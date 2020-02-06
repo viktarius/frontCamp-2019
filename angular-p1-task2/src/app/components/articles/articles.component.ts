@@ -1,10 +1,9 @@
 import {
   Component,
   ComponentFactoryResolver,
-  ElementRef,
-  EventEmitter, Input,
+  EventEmitter, Input, OnChanges,
   OnInit,
-  Output,
+  Output, SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { AdDirective } from "../../ad.directive";
@@ -16,7 +15,7 @@ import { ArticleComponent } from "../article/article.component";
   styleUrls: ['./articles.component.scss']
 })
 
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent implements OnInit, OnChanges {
   @Input() articles;
   @Output() loadMore = new EventEmitter();
 
@@ -36,10 +35,17 @@ export class ArticlesComponent implements OnInit {
   renderArticles() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ArticleComponent);
     const viewContainerRef = this.adArticles.viewContainerRef;
+    viewContainerRef.clear();
     this.articles.map(art => {
       const componentRef = viewContainerRef.createComponent(componentFactory);
       (<ArticleComponent>componentRef.instance).article = art;
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.articles.previousValue !== changes.articles.currentValue){
+      this.renderArticles();
+    }
   }
 
 }
