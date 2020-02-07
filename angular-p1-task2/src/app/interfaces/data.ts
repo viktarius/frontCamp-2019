@@ -1,4 +1,4 @@
-interface Article {
+export interface Article {
   id: number,
   source: Source
   author: String
@@ -11,7 +11,7 @@ interface Article {
   localArticle: boolean
 }
 
-interface Source {
+export interface Source {
   id: String,
   name: String
 }

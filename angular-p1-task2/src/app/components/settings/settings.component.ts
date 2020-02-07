@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { ISourceResponse } from '../../interfaces/response';
 import { SettingsService } from '../../helpers/settings.service'
 import { RequestService } from "../../helpers/request.service";
 
@@ -15,7 +17,7 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestService.getAllSources().subscribe((res: ISourceResponse) => this.sources = res.sources )
+    this.requestService.getAllSources().subscribe((res: ISourceResponse) => this.sources = res.sources)
   }
 
   changeSource(event) {
@@ -30,7 +32,7 @@ export class SettingsComponent implements OnInit {
     this.settingsService.sourceName = 'My articles';
   }
 
-  filterArticle(){
+  filterArticle() {
     console.log('articles was filtered');
   }
 

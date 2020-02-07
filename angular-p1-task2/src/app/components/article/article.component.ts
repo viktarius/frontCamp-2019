@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from "@angular/router";
+
+import { Article } from '../../interfaces/data';
 import { LocalArticleService } from "../../helpers/local-article.service";
 
 @Component({
@@ -8,7 +10,7 @@ import { LocalArticleService } from "../../helpers/local-article.service";
   styleUrls: ['./article.component.scss']
 })
 
-export class ArticleComponent implements AdComponent{
+export class ArticleComponent implements AdComponent {
   @Input() article: Article;
 
   constructor(private router: Router,
@@ -16,19 +18,19 @@ export class ArticleComponent implements AdComponent{
   }
 
   openArticle() {
-    if(this.article.localArticle){
+    if (this.article.localArticle) {
       this.router.navigate([`/show/${this.article.id}`]);
     }
   }
 
   editArticle() {
-    if(this.article.localArticle){
+    if (this.article.localArticle) {
       this.router.navigate([`/edit/${this.article.id}`]);
     }
   }
 
-  deleteArticle(event){
-    if(this.article.localArticle){
+  deleteArticle(event) {
+    if (this.article.localArticle) {
       this.localArticleService.deleteArticle(this.article.id);
       event.stopPropagation();
     }

@@ -1,4 +1,6 @@
-export const Articles: Array<Article> = [{
+import { Article } from '../interfaces/data';
+
+export const Articles: Article[] = [{
   id: 1,
   source: {
     id: "1",
